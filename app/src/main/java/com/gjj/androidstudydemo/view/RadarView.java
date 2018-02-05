@@ -12,7 +12,7 @@ import android.util.Log;
 import android.view.View;
 
 /**
- * Created by gaojuanjuan on 2018/1/6.
+ * Created by gaojuanjuan on 2018/1/six.
  */
 
 public class RadarView extends View {

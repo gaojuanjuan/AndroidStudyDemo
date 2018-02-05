@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context="com.gjj.androidstudydemo.activity.TweenActivity">
+
+    <LinearLayout
+        android:id="@+id/ll_tween"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="center">
+
+
+        <ImageView
+            android:layout_width="@dimen/img"
+            android:layout_height="@dimen/img"
+            android:src="@mipmap/six"/>
+        <ImageView
+            android:layout_width="@dimen/img"
+            android:layout_height="@dimen/img"
+            android:src="@mipmap/six"/>
+        <ImageView
+            android:layout_width="@dimen/img"
+            android:layout_height="@dimen/img"
+            android:src="@mipmap/six"/>
+
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_start1"
+        style="@style/Button_style"
+        android:text="开始动画"/>
+    <ImageView
+        android:id="@+id/iv_six"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/six"/>
+    <Button
+        android:id="@+id/btn_start2"
+        style="@style/Button_style"
+        android:text="开始动画"/>
+
+</LinearLayout>

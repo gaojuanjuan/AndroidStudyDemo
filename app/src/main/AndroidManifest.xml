@@ -4,9 +4,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity">
@@ -21,6 +20,14 @@
         <activity android:name=".activity.CustomViewDetailActivity">
         </activity>
         <activity android:name=".activity.AnimationActivity">
+        </activity>
+        <activity android:name=".activity.TweenActivity">
+        </activity>
+        <activity android:name=".activity.FrameAnimActivity">
+        </activity>
+        <activity android:name=".activity.PropertyAnimActivity">
+        </activity>
+        <activity android:name=".activity.PathAnimActivity">
         </activity>
     </application>
 
