@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:gjj="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <com.gjj.androidstudydemo.view.SearchView
+        android:id="@+id/search_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+
+    <com.gjj.androidstudydemo.view.MatrixAndCameraView
+        android:id="@+id/martrix_and_camera"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@mipmap/aa"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@mipmap/bb"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@mipmap/cc"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@mipmap/dd"/>
+
+    </com.gjj.androidstudydemo.view.MatrixAndCameraView>
+
+    <com.gjj.androidstudydemo.view.RadarView
+        android:id="@+id/radar_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <com.gjj.androidstudydemo.view.Bezier3
+        android:id="@+id/bezier3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <com.gjj.androidstudydemo.view.OpView
+        android:id="@+id/op_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <com.gjj.androidstudydemo.view.TwinklingTextView
+        android:id="@+id/twinkling_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="大傻逼大傻逼大傻逼"
+        android:textSize="30sp"
+        android:visibility="gone"/>
+
+    <com.gjj.androidstudydemo.view.ColorSelectorView
+        android:id="@+id/color_selector_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+    <com.gjj.androidstudydemo.view.CircleColorGradientSeekBarView
+        android:id="@+id/circle_gradient_seekbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+    <com.gjj.androidstudydemo.view.LineChartView
+        android:id="@+id/line_chart_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/bitmapshader_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <com.gjj.androidstudydemo.view.CircleImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/zfn"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="詹妮弗·劳伦斯"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+    <com.gjj.androidstudydemo.view.ComposeShaderView
+        android:id="@+id/shader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+
+        />
+
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="20dp"
+        android:visibility="gone">
+
+        <RadioButton
+            android:id="@+id/rb_0"
+            style="@style/Radiobutton"
+            android:text="0"/>
+
+        <RadioButton
+            android:id="@+id/rb_1"
+            style="@style/Radiobutton"
+            android:text="1"/>
+
+        <RadioButton
+            android:id="@+id/rb_2"
+            style="@style/Radiobutton"
+            android:text="2"/>
+
+        <RadioButton
+            android:id="@+id/rb_3"
+            style="@style/Radiobutton"
+            android:text="3"/>
+
+        <RadioButton
+            android:id="@+id/rb_4"
+            style="@style/Radiobutton"
+            android:text="4"/>
+
+    </RadioGroup>
+
+
+    <com.gjj.androidstudydemo.view.CheckView
+        android:id="@+id/checkview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/ll_checkview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/check"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="check"/>
+
+        <Button
+            android:id="@+id/uncheck"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="uncheck"/>
+
+    </LinearLayout>
+
+    <com.gjj.androidstudydemo.view.FiveRingView
+        android:id="@+id/five_ring_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        >
+        <com.gjj.androidstudydemo.view.RingView
+            style="@style/RingView_style"
+            gjj:ring_color="#3d50b5"
+            gjj:stroke_width="20"
+            />
+        <com.gjj.androidstudydemo.view.RingView
+            style="@style/RingView_style"
+            gjj:ring_color="#000001"
+            gjj:stroke_width="20"
+            />
+        <com.gjj.androidstudydemo.view.RingView
+            style="@style/RingView_style"
+            gjj:ring_color="#fd3a01"
+            gjj:stroke_width="20"
+            />
+        <com.gjj.androidstudydemo.view.RingView
+            style="@style/RingView_style"
+            gjj:ring_color="#fab83e"
+            gjj:stroke_width="20"
+            />
+        <com.gjj.androidstudydemo.view.RingView
+            style="@style/RingView_style"
+            gjj:ring_color="#1ffd01"
+            gjj:stroke_width="20"
+            />
+
+    </com.gjj.androidstudydemo.view.FiveRingView>
+
+
+    <com.gjj.androidstudydemo.view.PieChartView
+        android:id="@+id/pie_chart_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
+
+    <com.gjj.androidstudydemo.view.GradientSeekBarView
+        android:id="@+id/gradient_seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+</RelativeLayout>
