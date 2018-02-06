@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context="com.gjj.androidstudydemo.activity.TransitionsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_traditional_anim"
+            style="@style/Button_style"
+            android:text="传统转场动画"/>
+        <Button
+            android:id="@+id/btn_5_anim"
+            style="@style/Button_style"
+            android:text="5.0转场动画"/>
+        <Button
+            android:id="@+id/btn_typical_anim"
+            style="@style/Button_style"
+            android:text="典型应用"/>
+
+
+    </LinearLayout>
+</ScrollView>

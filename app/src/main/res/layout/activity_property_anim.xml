@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="16dp"
-            android:src="@mipmap/aa"/>
+            android:src="@mipmap/logo"/>
 
         <Button
             android:id="@+id/btn_property_start1"
@@ -34,7 +34,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="16dp"
             android:scaleType="fitCenter"
-            android:src="@mipmap/aa"/>
+            android:src="@mipmap/logo"/>
 
         <Button
             android:id="@+id/btn_property_start2"

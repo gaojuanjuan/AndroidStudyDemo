@@ -29,7 +29,7 @@ public class AnimationActivity extends AppCompatActivity {
         setTitle("动画的学习");
     }
 
-    @OnClick({R.id.btn_tween_anim, R.id.btn_frame_anim, R.id.btn_property_anim})
+    @OnClick({R.id.btn_tween_anim, R.id.btn_frame_anim, R.id.btn_property_anim,R.id.btn_circular_anim,R.id.btn_transitions_anim})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_tween_anim:
@@ -41,6 +41,13 @@ public class AnimationActivity extends AppCompatActivity {
             case R.id.btn_property_anim:
                 startActivity(new Intent(AnimationActivity.this,PropertyAnimActivity.class));
                 break;
+            case R.id.btn_circular_anim:
+                startActivity(new Intent(AnimationActivity.this,CircularRevealActivity.class));
+                break;
+            case R.id.btn_transitions_anim:
+                startActivity(new Intent(AnimationActivity.this,TransitionsActivity.class));
+                break;
+
         }
     }
 }

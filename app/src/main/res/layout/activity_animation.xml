@@ -25,6 +25,16 @@
             android:id="@+id/btn_property_anim"
             style="@style/Button_style"
             android:text="属性动画"/>
+        <Button
+            android:id="@+id/btn_circular_anim"
+            style="@style/Button_style"
+            android:text="Android 5.0 Circular Reveal"/>
+        <Button
+            android:id="@+id/btn_transitions_anim"
+            style="@style/Button_style"
+            android:text="Activity转场动画"/>
+
+
 
     </LinearLayout>
 </ScrollView>

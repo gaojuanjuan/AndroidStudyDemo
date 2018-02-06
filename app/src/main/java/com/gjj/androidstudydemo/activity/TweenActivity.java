@@ -41,8 +41,6 @@ public class TweenActivity extends AppCompatActivity {
                 break;
             case R.id.btn_start2:
                 animation = AnimationUtils.loadAnimation(this, R.anim.tween2);
-                animation.setRepeatCount(Animation.INFINITE);
-                animation.setRepeatMode(Animation.RESTART);
                 mIvSix.startAnimation(animation);
                 break;
         }

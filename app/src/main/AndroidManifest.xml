@@ -29,6 +29,20 @@
         </activity>
         <activity android:name=".activity.PathAnimActivity">
         </activity>
+        <activity android:name=".activity.CircularRevealActivity">
+        </activity>
+        <activity android:name=".activity.TransitionsActivity">
+        </activity>
+        <activity android:name=".activity.TraditionalActivity">
+        </activity>
+        <activity android:name=".activity.Android5Activity">
+        </activity>
+        <activity android:name=".activity.TypicalActivity">
+        </activity>
+        <activity android:name=".activity.Android5DetailActivity">
+        </activity>
+        <activity android:name=".activity.TypicalDetailActivity">
+        </activity>
     </application>
 
 </manifest>

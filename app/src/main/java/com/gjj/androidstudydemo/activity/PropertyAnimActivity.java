@@ -5,6 +5,7 @@ import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.LinearInterpolator;
@@ -93,19 +94,22 @@ public class PropertyAnimActivity extends AppCompatActivity {
                 final int layoutWidth = mLayout2.getWidth();
                 int layoutHeight = mLayout2.getHeight();
                 final int dotWidth = mView1.getWidth();
-                final int radio = layoutHeight - dotWidth >> 1;
+                //此处>>的优先级小于减号的，也就是先计算减号再除以2
+                final int radio = layoutHeight - dotWidth >> 1;//右移一位相当于除以2
+                Log.d("gjj","layoutWidth = "+layoutWidth+",layoutHeight = " +layoutHeight+",dotWidth = "
+                        +dotWidth+",dotWidth >> 1 = "+(dotWidth >> 1)+",radio = "+radio);
+                Log.d("gjj","mView1.getX() = "+mView1.getX()+"mView1.getY() = "+mView1.getY());
                 anim3 = ValueAnimator.ofFloat(0,1);
                 anim3.setDuration(1600);
                 anim3.setInterpolator(new AccelerateInterpolator());
-                anim3.setRepeatCount(ValueAnimator.INFINITE);
-                anim3.setRepeatMode(ValueAnimator.RESTART);
                 anim3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
                     public void onAnimationUpdate(ValueAnimator animation) {
                         float f = animation.getAnimatedFraction();
                         f+=0.5;
-                        if (f>1)
+                        if (f>1){
                             f-=1;
+                        }
                         double angle = f * Math.PI * 2;
                         double x = radio * Math.sin(angle);
                         double y = radio * Math.cos(angle);
