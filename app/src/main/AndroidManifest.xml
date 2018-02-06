@@ -43,6 +43,14 @@
         </activity>
         <activity android:name=".activity.TypicalDetailActivity">
         </activity>
+        <activity android:name=".activity.VectorAnimationActivity">
+        </activity>
+        <activity android:name=".activity.DrawPathActivity">
+        </activity>
+        <activity android:name=".activity.CustomSVG1Activity">
+        </activity>
+        <activity android:name=".activity.CustomSVG2Activity">
+        </activity>
     </application>
 
 </manifest>

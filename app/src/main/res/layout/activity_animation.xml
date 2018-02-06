@@ -33,8 +33,21 @@
             android:id="@+id/btn_transitions_anim"
             style="@style/Button_style"
             android:text="Activity转场动画"/>
-
-
-
+        <Button
+            android:id="@+id/btn_vector_anim"
+            style="@style/Button_style"
+            android:text="矢量动画"/>
+        <Button
+            android:id="@+id/btn_path_draw"
+            style="@style/Button_style"
+            android:text="Path绘制"/>
+        <Button
+            android:id="@+id/btn_custom_svg1"
+            style="@style/Button_style"
+            android:text="自定义SVG1"/>
+        <Button
+            android:id="@+id/btn_custom_svg2"
+            style="@style/Button_style"
+            android:text="自定义SVG2"/>
     </LinearLayout>
 </ScrollView>

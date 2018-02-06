@@ -29,25 +29,38 @@ public class AnimationActivity extends AppCompatActivity {
         setTitle("动画的学习");
     }
 
-    @OnClick({R.id.btn_tween_anim, R.id.btn_frame_anim, R.id.btn_property_anim,R.id.btn_circular_anim,R.id.btn_transitions_anim})
+    @OnClick({R.id.btn_tween_anim, R.id.btn_frame_anim, R.id.btn_property_anim,
+            R.id.btn_circular_anim, R.id.btn_transitions_anim, R.id.btn_vector_anim,
+            R.id.btn_path_draw, R.id.btn_custom_svg1, R.id.btn_custom_svg2})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_tween_anim:
-                startActivity(new Intent(AnimationActivity.this,TweenActivity.class));
+                startActivity(new Intent(AnimationActivity.this, TweenActivity.class));
                 break;
             case R.id.btn_frame_anim:
-                startActivity(new Intent(AnimationActivity.this,FrameAnimActivity.class));
+                startActivity(new Intent(AnimationActivity.this, FrameAnimActivity.class));
                 break;
             case R.id.btn_property_anim:
-                startActivity(new Intent(AnimationActivity.this,PropertyAnimActivity.class));
+                startActivity(new Intent(AnimationActivity.this, PropertyAnimActivity.class));
                 break;
             case R.id.btn_circular_anim:
-                startActivity(new Intent(AnimationActivity.this,CircularRevealActivity.class));
+                startActivity(new Intent(AnimationActivity.this, CircularRevealActivity.class));
                 break;
             case R.id.btn_transitions_anim:
-                startActivity(new Intent(AnimationActivity.this,TransitionsActivity.class));
+                startActivity(new Intent(AnimationActivity.this, TransitionsActivity.class));
                 break;
-
+            case R.id.btn_vector_anim:
+                startActivity(new Intent(AnimationActivity.this, VectorAnimationActivity.class));
+                break;
+            case R.id.btn_path_draw:
+                startActivity(new Intent(AnimationActivity.this, DrawPathActivity.class));
+                break;
+            case R.id.btn_custom_svg1:
+                startActivity(new Intent(AnimationActivity.this, CustomSVG1Activity.class));
+                break;
+            case R.id.btn_custom_svg2:
+                startActivity(new Intent(AnimationActivity.this, CustomSVG2Activity.class));
+                break;
         }
     }
 }
