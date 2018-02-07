@@ -35,6 +35,9 @@ public class TypicalActivity extends AppCompatActivity implements RVAdapter.RVCl
         init();
     }
 
+    /**
+     * 初始化控件和数据
+     */
     private void init() {
         mRv.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
 
@@ -68,6 +71,10 @@ public class TypicalActivity extends AppCompatActivity implements RVAdapter.RVCl
         mRVAdapter.setListener(this);
     }
 
+    /**
+     * 条目的点击事件
+     * @param position
+     */
     @Override
     public void onItemClick(int position) {
         RVBean bean = beans.get(position);
@@ -77,13 +84,16 @@ public class TypicalActivity extends AppCompatActivity implements RVAdapter.RVCl
         intent.putExtra("name",bean.getName());
         intent.putExtra("desc",bean.getDesc());
 
+        /**
+         * 获取到点击条目的view
+         */
         int firstVisiblePosition = ((LinearLayoutManager)mRv.getLayoutManager()).findFirstVisibleItemPosition();
 
         View itemView = mRv.getChildAt(position - firstVisiblePosition);
         View headImage = itemView.findViewById(R.id.head_image);
         View name = itemView.findViewById(R.id.name);
         View desc = itemView.findViewById(R.id.desc);
-
+        //启动activity时，使用共享元素
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,
                 Pair.create(headImage,"headImage"),
                 Pair.create(name,"name"),
