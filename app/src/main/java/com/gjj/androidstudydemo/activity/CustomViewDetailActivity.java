@@ -184,6 +184,7 @@ public class CustomViewDetailActivity extends AppCompatActivity {
         list.add(bean5);
         list.add(bean6);
         list.add(bean7);
+        //设置绘制圆弧的起始角度
         mPieChartView.setStartDegree(90f);
         mPieChartView.setData(list);
     }

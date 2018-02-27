@@ -24,7 +24,10 @@ public class CustomViewActivity extends AppCompatActivity {
         mIntent = new Intent(CustomViewActivity.this, CustomViewDetailActivity.class);
     }
 
-    @OnClick({R.id.btn_checkview, R.id.btn_drawpath, R.id.btn_bezier3, R.id.btn_op, R.id.btn_search_view, R.id.btn_matrix_camera1, R.id.btn_pie_chart, R.id.btn_five_ring, R.id.btn_seek_bar, R.id.btn_twinkling_tv, R.id.btn_color_selector, R.id.btn_circle_gradient_seekbar, R.id.btn_line_chart_view, R.id.btn_circle_img})
+    @OnClick({R.id.btn_checkview, R.id.btn_drawpath, R.id.btn_bezier3, R.id.btn_op,
+            R.id.btn_search_view, R.id.btn_matrix_camera1, R.id.btn_pie_chart, R.id.btn_five_ring,
+            R.id.btn_seek_bar, R.id.btn_twinkling_tv, R.id.btn_color_selector,
+            R.id.btn_circle_gradient_seekbar, R.id.btn_line_chart_view, R.id.btn_circle_img})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_checkview:

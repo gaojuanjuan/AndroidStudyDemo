@@ -29,7 +29,7 @@ public class PieChartView extends View {
     private int mRHeight;
     private int diameter;
     private float sumValue = 0;
-    private float rotateDegree;//每个圆弧的起始角度
+    private float startRotateDegree;//每个圆弧的起始角度
     private RectF iRectF;
     private int mMargin = 40;//矩形和圆的距离
     private int mRectWidth = 100;//矩形宽度
@@ -110,8 +110,9 @@ public class PieChartView extends View {
                 PieChartBean pieChartBean = beanList.get(i);
                 //画圆弧
                 mPaint.setColor(pieChartBean.mColor);
-                canvas.drawArc(mRectF,rotateDegree,pieChartBean.degree,true,mPaint);
-                rotateDegree += pieChartBean.degree;
+                canvas.drawArc(mRectF,startRotateDegree,pieChartBean.sweepAngle,true,mPaint);
+                //下一个圆弧的起始角度
+                startRotateDegree += pieChartBean.sweepAngle;
                 //画矩形和文字
                 drawRectAndText(canvas,pieChartBean);
             }
@@ -150,21 +151,22 @@ public class PieChartView extends View {
             PieChartBean pieChartBean = list.get(i);
             sumValue += pieChartBean.value;
         }
-        //计算每条数据的degree
+        //计算每条数据的sweepAngle
         for (int i = 0; i < list.size(); i++) {
             PieChartBean pieChartBean = list.get(i);
-            pieChartBean.degree = pieChartBean.value / sumValue * 360;
+            pieChartBean.sweepAngle = pieChartBean.value / sumValue * 360;
             beanList.add(pieChartBean);
         }
+        //刷新界面
         invalidate();
     }
 
     /**
-     * 设置绘制圆弧的起始角度
+     * 设置绘制第一个圆弧的起始角度
      * @param startDegree
      */
     public void setStartDegree(float startDegree){
-        this.rotateDegree = startDegree;
+        this.startRotateDegree = startDegree;
         invalidate();
     }
 }
