@@ -23,4 +23,22 @@
         <attr name="viewPortHeight" format="integer|reference"/>
         <attr name="strokeWidth" format="dimension|reference"/>
     </declare-styleable>
+
+
+    <!--注意这里的name要和自定义View的名称一致，不然在xml布局中无法引用-->
+    <declare-styleable name="HorizontalExpandMenu">
+        <!--下面是绘制圆角矩形需要的属性-->
+        <attr name="back_color" format="color"></attr>
+        <attr name="stroke_size" format="dimension"></attr>
+        <attr name="stroke_color" format="color"></attr>
+        <attr name="corner_radius" format="dimension"></attr>
+        <!--下面是绘制菜单栏按钮+ -->
+        <attr name="button_style">
+            <enum name="right" value="0"/>
+            <enum name="left" value="1"/>
+        </attr>
+        <attr name="button_icon_size" format="dimension"/>
+        <attr name="button_icon_stroke_width" format="dimension"/>
+        <attr name="button_icon_color" format="color"></attr>
+    </declare-styleable>
 </resources>

@@ -8,6 +8,29 @@
     android:layout_height="match_parent"
     >
 
+    <LinearLayout
+        android:id="@+id/expanded_menu_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.gjj.androidstudydemo.view.HorizontalExpandMenu
+            android:id="@+id/expanded_menu1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"/>
+        <com.gjj.androidstudydemo.view.HorizontalExpandMenu
+            android:id="@+id/expanded_menu2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            app:button_style="left"/>
+    </LinearLayout>
+
 
     <com.gjj.androidstudydemo.view.SearchView
         android:id="@+id/search_view"

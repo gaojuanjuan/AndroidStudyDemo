@@ -41,6 +41,7 @@ import static com.gjj.androidstudydemo.utils.Constants.BITMAP_SHADER;
 import static com.gjj.androidstudydemo.utils.Constants.CHECKVIEW;
 import static com.gjj.androidstudydemo.utils.Constants.CIRCLE_GRADIENT_SEEKBAR;
 import static com.gjj.androidstudydemo.utils.Constants.COLOR_SELECTOR;
+import static com.gjj.androidstudydemo.utils.Constants.CUSTOM_VIEW1;
 import static com.gjj.androidstudydemo.utils.Constants.FIVERING;
 import static com.gjj.androidstudydemo.utils.Constants.GRADIENT_SEEKBAR;
 import static com.gjj.androidstudydemo.utils.Constants.LINECHART;
@@ -161,6 +162,9 @@ public class CustomViewDetailActivity extends AppCompatActivity {
                 case CHECKVIEW:
                     mCheckview.setVisibility(View.VISIBLE);
                     mLlCheckview.setVisibility(View.VISIBLE);
+                    break;
+                case CUSTOM_VIEW1:
+
                     break;
 
             }

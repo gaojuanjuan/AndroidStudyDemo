@@ -21,6 +21,7 @@ public class Constants {
     public static final String FIVERING = "绘制五环";
     public static final String PIECHART = "绘制饼图";
     public static final String GRADIENT_SEEKBAR = "自定义渐变的seekbar";
+    public static final String CUSTOM_VIEW1 = "可展开收起的水平菜单栏";
 
 
 }
