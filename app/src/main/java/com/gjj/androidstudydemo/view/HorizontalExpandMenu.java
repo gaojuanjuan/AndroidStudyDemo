@@ -50,7 +50,7 @@ public class HorizontalExpandMenu extends RelativeLayout {
 
     private int buttonStyle;            //按钮类型
 
-    private int buttonRadius;           //按钮矩形区域内圆半径
+    private int buttonRadius;           //按钮矩形区域内圆半径,自定义HorizontalExpandMenu高度的一半
     private int buttonTop;              //按钮矩形区域的top值
     private int buttonBottom;           //按钮矩形区域的bottom值
 

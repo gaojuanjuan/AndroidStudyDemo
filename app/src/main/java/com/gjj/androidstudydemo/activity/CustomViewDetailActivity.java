@@ -102,6 +102,8 @@ public class CustomViewDetailActivity extends AppCompatActivity {
     PieChartView mPieChartView;
     @BindView(R.id.gradient_seek_bar)
     GradientSeekBarView mGradientSeekBar;
+    @BindView(R.id.expanded_menu_ll)
+    LinearLayout expandedMenuLl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +166,7 @@ public class CustomViewDetailActivity extends AppCompatActivity {
                     mLlCheckview.setVisibility(View.VISIBLE);
                     break;
                 case CUSTOM_VIEW1:
-
+                    expandedMenuLl.setVisibility(View.VISIBLE);
                     break;
 
             }
