@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.gjj.androidstudydemo">
+    package="com.gjj.androidstudydemo">
 
     <application
         android:allowBackup="true"
@@ -10,47 +10,30 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.CustomViewActivity">
-        </activity>
-        <activity android:name=".activity.CustomViewDetailActivity">
-        </activity>
-        <activity android:name=".activity.AnimationActivity">
-        </activity>
-        <activity android:name=".activity.TweenActivity">
-        </activity>
-        <activity android:name=".activity.FrameAnimActivity">
-        </activity>
-        <activity android:name=".activity.PropertyAnimActivity">
-        </activity>
-        <activity android:name=".activity.PathAnimActivity">
-        </activity>
-        <activity android:name=".activity.CircularRevealActivity">
-        </activity>
-        <activity android:name=".activity.TransitionsActivity">
-        </activity>
-        <activity android:name=".activity.TraditionalActivity">
-        </activity>
-        <activity android:name=".activity.Android5Activity">
-        </activity>
-        <activity android:name=".activity.TypicalActivity">
-        </activity>
-        <activity android:name=".activity.Android5DetailActivity">
-        </activity>
-        <activity android:name=".activity.TypicalDetailActivity">
-        </activity>
-        <activity android:name=".activity.VectorAnimationActivity">
-        </activity>
-        <activity android:name=".activity.DrawPathActivity">
-        </activity>
-        <activity android:name=".activity.CustomSVG1Activity">
-        </activity>
-        <activity android:name=".activity.CustomSVG2Activity">
-        </activity>
+        <activity android:name=".activity.CustomViewActivity"></activity>
+        <activity android:name=".activity.CustomViewDetailActivity"></activity>
+        <activity android:name=".activity.AnimationActivity"></activity>
+        <activity android:name=".activity.TweenActivity"></activity>
+        <activity android:name=".activity.FrameAnimActivity"></activity>
+        <activity android:name=".activity.PropertyAnimActivity"></activity>
+        <activity android:name=".activity.PathAnimActivity"></activity>
+        <activity android:name=".activity.CircularRevealActivity"></activity>
+        <activity android:name=".activity.TransitionsActivity"></activity>
+        <activity android:name=".activity.TraditionalActivity"></activity>
+        <activity android:name=".activity.Android5Activity"></activity>
+        <activity android:name=".activity.TypicalActivity"></activity>
+        <activity android:name=".activity.Android5DetailActivity"></activity>
+        <activity android:name=".activity.TypicalDetailActivity"></activity>
+        <activity android:name=".activity.VectorAnimationActivity"></activity>
+        <activity android:name=".activity.DrawPathActivity"></activity>
+        <activity android:name=".activity.CustomSVG1Activity"></activity>
+        <activity android:name=".activity.CustomSVG2Activity"></activity>
+        <activity android:name=".activity.DrawRectActivity"></activity>
     </application>
 
 </manifest>
