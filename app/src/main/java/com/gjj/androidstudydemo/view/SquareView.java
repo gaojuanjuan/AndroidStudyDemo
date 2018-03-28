@@ -51,18 +51,13 @@ public class SquareView extends View {
         textPaint = new Paint();
         textPaint.setColor(Color.WHITE);
         textPaint.setTextSize(40);
-//        initData();
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        Log.d("gjj","得到的w = "+w+",得到的measureWidth = "+getMeasuredWidth());
-        Log.d("gjj","得到的h = "+h+",得到的measureHeight = "+getMeasuredHeight());
         //计算正方形之间的间距
         firstMarginL = (w - (lineNum * squareLength) - (lineNum -1)*squareMargin)/2;
-
-        Log.d("gjj","firstMarginL = "+firstMarginL);
     }
 
     @Override
@@ -72,14 +67,15 @@ public class SquareView extends View {
             return;
         canvas.translate(firstMarginL,0);
         for (int i = 0; i < mSquareBeanList.size(); i++) {
+            //计算绘制矩形的位置
             RectF rectF = new RectF(
                     squareMargin+(i%12)*(squareLength+squareMargin),
                     squareMargin+(squareLength+squareMargin)*(i/lineNum),
                     (squareMargin+squareLength)*(i % 12 + 1),
                     (squareMargin+squareLength)*((i+12)/lineNum));
-            if (mSquareBeanList.get(i).getState() == 0){
+            if (mSquareBeanList.get(i).getState() == 0){//如果是加号，颜色是绿色
                 mPaint.setColor(Color.GREEN);
-            }else {
+            }else {//如果是减号，颜色是红色
                 mPaint.setColor(Color.RED);
             }
             //绘制矩形
@@ -97,7 +93,6 @@ public class SquareView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        Log.d("gjj","重新测量了");
         int wMode = MeasureSpec.getMode(widthMeasureSpec);
         int hMode = MeasureSpec.getMode(heightMeasureSpec);
         int wSize = MeasureSpec.getSize(widthMeasureSpec);
@@ -137,6 +132,11 @@ public class SquareView extends View {
         postInvalidate();
     }
 
+    /**
+     * 该方法是对外暴露的，点击加号和减号是调用的
+     * @param id            数据条目和正方形条目之间的对应
+     * @param isClickAdd    点击加号时，isClickAdd设置为true，点击减号时，isClickAdd设置为false
+     */
     public void addData(int id,boolean isClickAdd){
         if (mSquareBeanList == null){
             mSquareBeanList = new ArrayList<>();
@@ -176,7 +176,6 @@ public class SquareView extends View {
             }
         }
         if (mSquareBeanList != null &&mSquareBeanList.size()>12 && mSquareBeanList.size() % 12 == 1){
-            Log.d("gjj","要重新measure了，size = "+mSquareBeanList.size());
             requestLayout();
         }else {
             postInvalidate();
