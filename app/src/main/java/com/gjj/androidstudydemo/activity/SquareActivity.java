@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DrawRectActivity extends AppCompatActivity implements SquareAdapter.ReduceAndAddClickListener {
+public class SquareActivity extends AppCompatActivity implements SquareAdapter.ReduceAndAddClickListener {
 
 
     @BindView(R.id.square_view)

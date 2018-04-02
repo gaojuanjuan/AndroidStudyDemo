@@ -77,7 +77,7 @@ public class CustomViewActivity extends AppCompatActivity {
                 startCustomActivity(Constants.CUSTOM_VIEW1);
                 break;
             case R.id.btn_draw_rect:
-                startActivity(new Intent(CustomViewActivity.this, DrawRectActivity.class));
+                startActivity(new Intent(CustomViewActivity.this, SquareActivity.class));
                 break;
         }
     }
