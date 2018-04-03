@@ -14,6 +14,10 @@
         android:gravity="center"
         android:orientation="vertical">
         <Button
+            android:id="@+id/btn_circle_bar"
+            style="@style/Button_style"
+            android:text="圆形进度条"/>
+        <Button
             android:id="@+id/btn_draw_rect"
             style="@style/Button_style"
             android:text="动态添加正方形"/>

@@ -1,6 +1,7 @@
 package com.gjj.androidstudydemo.activity;
 
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -9,13 +10,17 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gjj.androidstudydemo.R;
 import com.gjj.androidstudydemo.bean.PieChartBean;
 import com.gjj.androidstudydemo.utils.Constants;
+import com.gjj.androidstudydemo.utils.LinearGradientUtil;
 import com.gjj.androidstudydemo.view.Bezier3;
 import com.gjj.androidstudydemo.view.CheckView;
+import com.gjj.androidstudydemo.view.CircleBarView;
 import com.gjj.androidstudydemo.view.CircleColorGradientSeekBarView;
 import com.gjj.androidstudydemo.view.ColorSelectorView;
 import com.gjj.androidstudydemo.view.ComposeShaderView;
@@ -29,6 +34,7 @@ import com.gjj.androidstudydemo.view.RadarView;
 import com.gjj.androidstudydemo.view.SearchView;
 import com.gjj.androidstudydemo.view.TwinklingTextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +45,7 @@ import butterknife.OnClick;
 import static com.gjj.androidstudydemo.utils.Constants.BEZIER3;
 import static com.gjj.androidstudydemo.utils.Constants.BITMAP_SHADER;
 import static com.gjj.androidstudydemo.utils.Constants.CHECKVIEW;
+import static com.gjj.androidstudydemo.utils.Constants.CIRCLE_BAR;
 import static com.gjj.androidstudydemo.utils.Constants.CIRCLE_GRADIENT_SEEKBAR;
 import static com.gjj.androidstudydemo.utils.Constants.COLOR_SELECTOR;
 import static com.gjj.androidstudydemo.utils.Constants.CUSTOM_VIEW1;
@@ -104,6 +111,33 @@ public class CustomViewDetailActivity extends AppCompatActivity {
     GradientSeekBarView mGradientSeekBar;
     @BindView(R.id.expanded_menu_ll)
     LinearLayout expandedMenuLl;
+    @BindView(R.id.circle_bar_view)
+    CircleBarView mCircleBarView;
+    @BindView(R.id.text_progress)
+    TextView mTextProgress;
+    @BindView(R.id.rl_circle_bar)
+    RelativeLayout mRlCircleBar;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mCircleBarView.setOnAnimationListener(new CircleBarView.OnAnimationListener() {
+            @Override
+            public String howToChangeText(float interpolatedTime, float progressNum, float maxNum) {
+                DecimalFormat decimalFormat = new DecimalFormat("0.00");
+                String s = decimalFormat.format(interpolatedTime * progressNum / maxNum * 100) + "%";
+                return s;
+            }
+
+            @Override
+            public void howTiChangeProgressColor(Paint paint, float interpolatedTime, float progressNum, float maxNum) {
+                LinearGradientUtil linearGradientUtil = new LinearGradientUtil(Color.YELLOW, Color.RED);
+                paint.setColor(linearGradientUtil.getColor(interpolatedTime));
+            }
+        });
+        mCircleBarView.setTextView(mTextProgress);
+        mCircleBarView.setProgressNum(100, 3000);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,6 +202,10 @@ public class CustomViewDetailActivity extends AppCompatActivity {
                 case CUSTOM_VIEW1:
                     expandedMenuLl.setVisibility(View.VISIBLE);
                     break;
+                case CIRCLE_BAR:
+                    mRlCircleBar.setVisibility(View.VISIBLE);
+                    break;
+
 
             }
             setTitle(flag);
