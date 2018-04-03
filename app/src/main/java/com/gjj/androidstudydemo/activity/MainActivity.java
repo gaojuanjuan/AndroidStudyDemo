@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.btn_custom_view, R.id.btn_anim})
+    @OnClick({R.id.btn_custom_view, R.id.btn_anim,R.id.btn_glide})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_custom_view:
@@ -36,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_anim:
                 startActivity(new Intent(MainActivity.this,AnimationActivity.class));
                 break;
+            case R.id.btn_glide:
+                startActivity(new Intent(MainActivity.this,GlideActivity.class));
+                break;
+
         }
     }
 }

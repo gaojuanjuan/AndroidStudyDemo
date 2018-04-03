@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="gone"
         >
 
         <com.gjj.androidstudydemo.view.HorizontalExpandMenu
@@ -22,7 +21,42 @@
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
+            android:layout_marginRight="15dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="#108bfc"
+                    android:text="item1"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="#fbbc02"
+                    android:text="item2"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="#439c4b"
+                    android:text="item3"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="#fb512a"
+                    android:text="item4"/>
+
+            </LinearLayout>
+        </com.gjj.androidstudydemo.view.HorizontalExpandMenu>
         <com.gjj.androidstudydemo.view.HorizontalExpandMenu
             android:id="@+id/expanded_menu2"
             android:layout_width="match_parent"
@@ -30,7 +64,51 @@
             android:layout_marginTop="20dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            app:button_style="left"/>
+            app:button_style="left">
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:scrollbars="none">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:clickable="true">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:background="#108bfc"
+                        android:text="item1"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:background="#fbbc02"
+                        android:text="item2"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:background="#439c4b"
+                        android:text="item3"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:background="#fb512a"
+                        android:text="item4"/>
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+        </com.gjj.androidstudydemo.view.HorizontalExpandMenu>
     </LinearLayout>
 
 
