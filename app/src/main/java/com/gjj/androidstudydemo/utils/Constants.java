@@ -23,6 +23,7 @@ public class Constants {
     public static final String GRADIENT_SEEKBAR = "自定义渐变的seekbar";
     public static final String CUSTOM_VIEW1 = "可展开收起的水平菜单栏";
     public static final String CIRCLE_BAR = "圆形进度条";
+    public static final String WAVE_PROGRESS = "水波浪进度框";
 
 
 }

@@ -26,6 +26,7 @@ import com.gjj.androidstudydemo.view.ColorSelectorView;
 import com.gjj.androidstudydemo.view.ComposeShaderView;
 import com.gjj.androidstudydemo.view.FiveRingView;
 import com.gjj.androidstudydemo.view.GradientSeekBarView;
+import com.gjj.androidstudydemo.view.HorizontalExpandMenu;
 import com.gjj.androidstudydemo.view.LineChartView;
 import com.gjj.androidstudydemo.view.MatrixAndCameraView;
 import com.gjj.androidstudydemo.view.OpView;
@@ -33,6 +34,7 @@ import com.gjj.androidstudydemo.view.PieChartView;
 import com.gjj.androidstudydemo.view.RadarView;
 import com.gjj.androidstudydemo.view.SearchView;
 import com.gjj.androidstudydemo.view.TwinklingTextView;
+import com.gjj.androidstudydemo.view.WaveProgressView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -58,6 +60,7 @@ import static com.gjj.androidstudydemo.utils.Constants.PATHMEASURE_SEARCHVIEW;
 import static com.gjj.androidstudydemo.utils.Constants.PIECHART;
 import static com.gjj.androidstudydemo.utils.Constants.RADAR;
 import static com.gjj.androidstudydemo.utils.Constants.TWINKLING_TV;
+import static com.gjj.androidstudydemo.utils.Constants.WAVE_PROGRESS;
 
 public class CustomViewDetailActivity extends AppCompatActivity {
 
@@ -117,26 +120,41 @@ public class CustomViewDetailActivity extends AppCompatActivity {
     TextView mTextProgress;
     @BindView(R.id.rl_circle_bar)
     RelativeLayout mRlCircleBar;
+    @BindView(R.id.wave_progress_view)
+    WaveProgressView mWaveProgressView;
+    @BindView(R.id.rl_wave_progress)
+    RelativeLayout mRlWaveProgress;
+    @BindView(R.id.tv_wave)
+    TextView mTvWave;
+    @BindView(R.id.expanded_menu1)
+    HorizontalExpandMenu mExpandedMenu1;
+    @BindView(R.id.expanded_menu2)
+    HorizontalExpandMenu mExpandedMenu2;
+
 
     @Override
     protected void onStart() {
         super.onStart();
-        mCircleBarView.setOnAnimationListener(new CircleBarView.OnAnimationListener() {
-            @Override
-            public String howToChangeText(float interpolatedTime, float progressNum, float maxNum) {
-                DecimalFormat decimalFormat = new DecimalFormat("0.00");
-                String s = decimalFormat.format(interpolatedTime * progressNum / maxNum * 100) + "%";
-                return s;
-            }
+        if (mRlCircleBar.getVisibility() == View.VISIBLE) {
+            mCircleBarView.setOnAnimationListener(new CircleBarView.OnAnimationListener() {
+                @Override
+                public String howToChangeText(float interpolatedTime, float progressNum, float maxNum) {
+                    DecimalFormat decimalFormat = new DecimalFormat("0.00");
+                    String s = decimalFormat.format(interpolatedTime * progressNum / maxNum * 100) + "%";
+                    return s;
+                }
 
-            @Override
-            public void howTiChangeProgressColor(Paint paint, float interpolatedTime, float progressNum, float maxNum) {
-                LinearGradientUtil linearGradientUtil = new LinearGradientUtil(Color.YELLOW, Color.RED);
-                paint.setColor(linearGradientUtil.getColor(interpolatedTime));
-            }
-        });
-        mCircleBarView.setTextView(mTextProgress);
-        mCircleBarView.setProgressNum(100, 3000);
+                @Override
+                public void howTiChangeProgressColor(Paint paint, float interpolatedTime, float progressNum, float maxNum) {
+                    LinearGradientUtil linearGradientUtil = new LinearGradientUtil(Color.YELLOW, Color.RED);
+                    paint.setColor(linearGradientUtil.getColor(interpolatedTime));
+                }
+            });
+            mCircleBarView.setTextView(mTextProgress);
+            mCircleBarView.setProgressNum(100, 3000);
+        }
+
+
     }
 
     @Override
@@ -204,6 +222,25 @@ public class CustomViewDetailActivity extends AppCompatActivity {
                     break;
                 case CIRCLE_BAR:
                     mRlCircleBar.setVisibility(View.VISIBLE);
+                    break;
+                case WAVE_PROGRESS:
+                    mRlWaveProgress.setVisibility(View.VISIBLE);
+                    mWaveProgressView.setTextView(mTvWave);
+                    mWaveProgressView.setOnAnimationListener(new WaveProgressView.OnAnimationListener() {
+                        @Override
+                        public String howToChangeText(float interpolatedTime, float updateNum, float maxNum) {
+                            DecimalFormat decimalFormat = new DecimalFormat("0.00");
+                            String s = decimalFormat.format(interpolatedTime * updateNum / maxNum * 100) + "%";
+                            return s;
+                        }
+
+                        @Override
+                        public float howToChangeWaveHeight(float percent, float waveHeight) {
+                            return (1-percent)*waveHeight;
+                        }
+                    });
+                    mWaveProgressView.setProgressNum(80, 3000);
+                    mWaveProgressView.setDrawSecondWave(true);
                     break;
 
 

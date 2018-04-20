@@ -13,10 +13,16 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_wave_progress"
+            style="@style/Button_style"
+            android:text="水波浪进度框"/>
         <Button
             android:id="@+id/btn_circle_bar"
             style="@style/Button_style"
             android:text="圆形进度条"/>
+
         <Button
             android:id="@+id/btn_draw_rect"
             style="@style/Button_style"

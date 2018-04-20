@@ -51,4 +51,11 @@
         <attr name="start_angle" format="float"/>
         <attr name="sweep_angle" format="float"/>
     </declare-styleable>
+    <declare-styleable name="WaveProgressView">
+        <attr name="wave_color" format="color"/>
+        <attr name="wave_bg_color" format="color"/>
+        <attr name="wave_width" format="dimension"/>
+        <attr name="wave_height" format="dimension"/>
+        <attr name="second_wave_color" format="color"/>
+    </declare-styleable>
 </resources>

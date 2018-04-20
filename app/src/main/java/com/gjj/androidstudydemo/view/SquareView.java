@@ -26,7 +26,7 @@ public class SquareView extends View {
     private int squareLength = 100;
     private List<SquareBean> mSquareBeanList;
     private int firstMarginL;
-    private int lineNum = 12;
+    private int lineNum = 15;
     private Paint textPaint;
     private Context mContext;
     private int viewHeigth;
@@ -69,10 +69,10 @@ public class SquareView extends View {
         for (int i = 0; i < mSquareBeanList.size(); i++) {
             //计算绘制矩形的位置
             RectF rectF = new RectF(
-                    squareMargin+(i%12)*(squareLength+squareMargin),
+                    squareMargin+(i%lineNum)*(squareLength+squareMargin),
                     squareMargin+(squareLength+squareMargin)*(i/lineNum),
-                    (squareMargin+squareLength)*(i % 12 + 1),
-                    (squareMargin+squareLength)*((i+12)/lineNum));
+                    (squareMargin+squareLength)*(i % lineNum + 1),
+                    (squareMargin+squareLength)*((i+lineNum)/lineNum));
             if (mSquareBeanList.get(i).getState() == 0){//如果是加号，颜色是绿色
                 mPaint.setColor(Color.GREEN);
             }else {//如果是减号，颜色是红色
@@ -86,8 +86,8 @@ public class SquareView extends View {
                     (mSquareBeanList.get(i).getId()+"").length(), rect);
             //绘制正方向上的文字
             canvas.drawText(mSquareBeanList.get(i).getId()+"",
-                    squareMargin+(i%12)*(squareLength+squareMargin) + squareLength/2-rect.width()/2,
-                    (squareMargin+squareLength)*((i+12)/lineNum)-squareLength/2+rect.height()/2,textPaint);
+                    squareMargin+(i%lineNum)*(squareLength+squareMargin) + squareLength/2-rect.width()/2,
+                    (squareMargin+squareLength)*((i+lineNum)/lineNum)-squareLength/2+rect.height()/2,textPaint);
         }
     }
 
@@ -119,7 +119,7 @@ public class SquareView extends View {
             case MeasureSpec.UNSPECIFIED://很少会用到不考虑
                 //相当于wrap_content
                 if (mSquareBeanList != null){
-                    viewHeigth = 140 + (mSquareBeanList.size()/12)*120;
+                    viewHeigth = 140 + (mSquareBeanList.size()/lineNum)*120;
                 }else {
                     viewHeigth = 140;
                 }
@@ -175,7 +175,7 @@ public class SquareView extends View {
                 return;
             }
         }
-        if (mSquareBeanList != null &&mSquareBeanList.size()>12 && mSquareBeanList.size() % 12 == 1){
+        if (mSquareBeanList != null &&mSquareBeanList.size()>lineNum && mSquareBeanList.size() % lineNum == 1){
             requestLayout();
         }else {
             postInvalidate();
