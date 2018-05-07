@@ -23,10 +23,6 @@
             android:id="@+id/btn_anim"
             style="@style/Button_style"
             android:text="动画实例的学习"/>
-        <Button
-            android:id="@+id/btn_glide"
-            style="@style/Button_style"
-            android:text="Glide的使用"/>
 
     </LinearLayout>
 </ScrollView>

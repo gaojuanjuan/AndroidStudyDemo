@@ -19,6 +19,7 @@ import com.gjj.androidstudydemo.bean.PieChartBean;
 import com.gjj.androidstudydemo.utils.Constants;
 import com.gjj.androidstudydemo.utils.LinearGradientUtil;
 import com.gjj.androidstudydemo.view.Bezier3;
+import com.gjj.androidstudydemo.view.BookPageView;
 import com.gjj.androidstudydemo.view.CheckView;
 import com.gjj.androidstudydemo.view.CircleBarView;
 import com.gjj.androidstudydemo.view.CircleColorGradientSeekBarView;
@@ -46,6 +47,7 @@ import butterknife.OnClick;
 
 import static com.gjj.androidstudydemo.utils.Constants.BEZIER3;
 import static com.gjj.androidstudydemo.utils.Constants.BITMAP_SHADER;
+import static com.gjj.androidstudydemo.utils.Constants.BOOK_PAGE;
 import static com.gjj.androidstudydemo.utils.Constants.CHECKVIEW;
 import static com.gjj.androidstudydemo.utils.Constants.CIRCLE_BAR;
 import static com.gjj.androidstudydemo.utils.Constants.CIRCLE_GRADIENT_SEEKBAR;
@@ -130,6 +132,8 @@ public class CustomViewDetailActivity extends AppCompatActivity {
     HorizontalExpandMenu mExpandedMenu1;
     @BindView(R.id.expanded_menu2)
     HorizontalExpandMenu mExpandedMenu2;
+    @BindView(R.id.book_page)
+    BookPageView mBookPage;
 
 
     @Override
@@ -236,13 +240,16 @@ public class CustomViewDetailActivity extends AppCompatActivity {
 
                         @Override
                         public float howToChangeWaveHeight(float percent, float waveHeight) {
-                            return (1-percent)*waveHeight;
+                            return (1 - percent) * waveHeight;
                         }
                     });
                     mWaveProgressView.setProgressNum(80, 3000);
                     mWaveProgressView.setDrawSecondWave(true);
                     break;
 
+                case BOOK_PAGE:
+                    mBookPage.setVisibility(View.VISIBLE);
+                    break;
 
             }
             setTitle(flag);

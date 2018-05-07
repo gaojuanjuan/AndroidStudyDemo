@@ -18,16 +18,19 @@ public class MainActivity extends AppCompatActivity {
     Button mBtnCustomView;
     @BindView(R.id.btn_anim)
     Button mBtnAnim;
+    private String[] animStrings;
+    private String[] customViewStrings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        animStrings = getResources().getStringArray(R.array.animation);
+        customViewStrings = getResources().getStringArray(R.array.custom_view);
     }
 
-    @OnClick({R.id.btn_custom_view, R.id.btn_anim,R.id.btn_glide})
+    @OnClick({R.id.btn_custom_view, R.id.btn_anim})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_custom_view:
@@ -36,10 +39,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_anim:
                 startActivity(new Intent(MainActivity.this,AnimationActivity.class));
                 break;
-            case R.id.btn_glide:
-                startActivity(new Intent(MainActivity.this,GlideActivity.class));
-                break;
-
         }
     }
+
 }

@@ -8,6 +8,14 @@
     android:layout_height="match_parent"
     >
 
+    <com.gjj.androidstudydemo.view.BookPageView
+        android:id="@+id/book_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:layout_marginLeft="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_15dp"/>
     <RelativeLayout
         android:id="@+id/rl_wave_progress"
         android:layout_width="200dp"

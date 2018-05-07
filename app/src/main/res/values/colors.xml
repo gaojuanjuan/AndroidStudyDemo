@@ -6,5 +6,6 @@
     <color name="theme_color">#17a6f4</color>
     <color name="bg_search_view">#0082D7</color>
     <color name="light">#800de6e8</color>
+    <color name="blue_light">#00a8f2</color>
 
 </resources>

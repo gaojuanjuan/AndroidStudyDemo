@@ -15,6 +15,10 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_BookPage"
+            style="@style/Button_style"
+            android:text="书籍翻页效果"/>
+        <Button
             android:id="@+id/btn_wave_progress"
             style="@style/Button_style"
             android:text="水波浪进度框"/>
