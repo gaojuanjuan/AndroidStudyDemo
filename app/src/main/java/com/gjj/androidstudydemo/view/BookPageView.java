@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.Region;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -47,6 +48,8 @@ public class BookPageView extends View {
     public static final String STYLE_LOWER_RIGHT = "STYLE_LOWER_RIGHT";//f点在右下角
 
     public Scroller mScroller;
+    private Paint textPaint;
+
     public BookPageView(Context context) {
         super(context);
     }
@@ -100,12 +103,17 @@ public class BookPageView extends View {
         pathBPaint = new Paint();
         pathBPaint.setColor(getResources().getColor(R.color.blue_light));
         pathBPaint.setAntiAlias(true);
-        pathBPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_ATOP));
+//        pathBPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_ATOP));
 
         pathB = new Path();
 
         mScroller = new Scroller(context,new LinearInterpolator());//以常量速率滑动即可
 
+        textPaint = new Paint();
+        textPaint.setColor(Color.BLACK);
+        textPaint.setTextAlign(Paint.Align.CENTER);
+        textPaint.setSubpixelText(true);
+        textPaint.setTextSize(40);
     }
 
     @Override
@@ -135,21 +143,68 @@ public class BookPageView extends View {
         mBitmap = Bitmap.createBitmap((int) viewWidth, (int) viewHeight, Bitmap.Config.ARGB_8888);
         bitmapCanvas = new Canvas(mBitmap);
         if (a.x == -1 && a.y == -1){
-            bitmapCanvas.drawPath(getPathDefault(),pathAPaint);
+//            bitmapCanvas.drawPath(getPathDefault(),pathAPaint);
+            drawPathAContent(bitmapCanvas,getPathDefault(),pathAPaint);
         }else {
             if (f.x==viewWidth && f.y == 0){
-                bitmapCanvas.drawPath(getPathAFromTopRight(),pathAPaint);
+//                bitmapCanvas.drawPath(getPathAFromTopRight(),pathAPaint);
+                drawPathAContent(bitmapCanvas,getPathAFromTopRight(),pathAPaint);
+                
+                bitmapCanvas.drawPath(getPathC(),pathCPaint);
+                drawPathBContent(bitmapCanvas,getPathAFromTopRight(),pathBPaint);
             }else if (f.x == viewWidth && f.y == viewHeight){
-                bitmapCanvas.drawPath(getPathAFromLowerRight(),pathAPaint);
+//                bitmapCanvas.drawPath(getPathAFromLowerRight(),pathAPaint);
+                drawPathAContent(bitmapCanvas,getPathAFromLowerRight(),pathAPaint);
+
+                bitmapCanvas.drawPath(getPathC(),pathCPaint);
+                drawPathBContent(bitmapCanvas,getPathAFromLowerRight(),pathBPaint);
+                
             }
-            bitmapCanvas.drawPath(getPathC(),pathCPaint);
-            bitmapCanvas.drawPath(getPathB(),pathBPaint);
+//            bitmapCanvas.drawPath(getPathB(),pathBPaint);
         }
 
         canvas.drawBitmap(mBitmap,0,0,null);
         //绘制个标识点
 //        drawIdentificationPoint(canvas);
 
+    }
+
+    private void drawPathBContent(Canvas canvas, Path pathA, Paint pathPaint) {
+        Bitmap contentBitmap = Bitmap.createBitmap(viewWidth, viewHeight, Bitmap.Config.RGB_565);
+        Canvas contentCanvas = new Canvas(contentBitmap);
+
+        //下面开始绘制区域内的内容...
+        contentCanvas.drawPath(getPathB(),pathPaint);
+        contentCanvas.drawText("这是在B区域的内容...BBBB", viewWidth-350, viewHeight-100, textPaint);
+
+        //结束绘制区域内的内容...
+
+        canvas.save();
+        canvas.clipPath(pathA);//裁剪出A区域
+        canvas.clipPath(getPathC(),Region.Op.UNION);//裁剪出A和C区域的全集
+        canvas.clipPath(getPathB(), Region.Op.REVERSE_DIFFERENCE);//裁剪出B区域中不同于与AC区域的部分
+        canvas.drawBitmap(contentBitmap, 0, 0, null);
+        canvas.restore();
+
+    }
+
+    /**
+     * 绘制区域A的内容
+     * @param canvas
+     * @param pathA
+     * @param pathPaint
+     */
+    private void drawPathAContent(Canvas canvas, Path pathA, Paint pathPaint) {
+        Bitmap contentBitmap = Bitmap.createBitmap(viewWidth, viewHeight, Bitmap.Config.RGB_565);
+        Canvas contentCanvas = new Canvas(contentBitmap);
+       //开始绘制区域内的内容
+        contentCanvas.drawPath(pathA,pathPaint);
+        contentCanvas.drawText("这是在A区域的内容...AAAA",viewWidth-350,viewHeight-100,textPaint);
+        //结束绘制区域内的内容...
+        canvas.save();
+        canvas.clipPath(pathA, Region.Op.INTERSECT);//对绘制内容进行裁剪，取和A区域的交集
+        canvas.drawBitmap(contentBitmap,0,0,null);
+        canvas.restore();
     }
 
     private Path getPathDefault() {
