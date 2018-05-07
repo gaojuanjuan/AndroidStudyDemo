@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -249,6 +250,27 @@ public class CustomViewDetailActivity extends AppCompatActivity {
 
                 case BOOK_PAGE:
                     mBookPage.setVisibility(View.VISIBLE);
+                    mBookPage.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            switch (event.getAction()){
+                                case MotionEvent.ACTION_DOWN:
+                                    if (event.getY() < mBookPage.getViewHeight()/2){
+                                        mBookPage.setTouchPoint(event.getX(),event.getY(),BookPageView.STYLE_TOP_RIGHT);
+                                    }else {//从下半部分翻页
+                                        mBookPage.setTouchPoint(event.getX(),event.getY(),BookPageView.STYLE_LOWER_RIGHT);
+                                    }
+                                    break;
+                                case MotionEvent.ACTION_MOVE:
+                                    mBookPage.setTouchPoint(event.getX(),event.getY(),"");
+                                    break;
+                                case MotionEvent.ACTION_UP:
+                                    mBookPage.setDefaultPath();
+                                    break;
+                            }
+                            return false;
+                        }
+                    });
                     break;
 
             }

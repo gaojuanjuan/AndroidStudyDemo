@@ -37,6 +37,9 @@ public class BookPageView extends View {
     private Paint pathBPaint;
     private Path pathB;
 
+    public static final String STYLE_TOP_RIGHT = "STYLE_TOP_RIGHT";//f点在右上角
+    public static final String STYLE_LOWER_RIGHT = "STYLE_LOWER_RIGHT";//f点在右下角
+
     public BookPageView(Context context) {
         super(context);
     }
@@ -53,8 +56,11 @@ public class BookPageView extends View {
         viewHeight = defaultHeight;
         viewWidth = defaultWidth;
 
-        a = new MyPoint(400, 800);
-        f = new MyPoint(viewWidth, viewHeight);
+//        a = new MyPoint(400, 800);
+//        f = new MyPoint(viewWidth, viewHeight);
+        a = new MyPoint();
+        f = new MyPoint();
+
         g = new MyPoint();
         e = new MyPoint();
         h = new MyPoint();
@@ -64,7 +70,6 @@ public class BookPageView extends View {
         i = new MyPoint();
         j = new MyPoint();
         k = new MyPoint();
-        calcPointsXY(a, f);
 
         pointPaint = new Paint();
         pointPaint.setColor(Color.RED);
@@ -103,14 +108,75 @@ public class BookPageView extends View {
 
         mBitmap = Bitmap.createBitmap((int) viewWidth, (int) viewHeight, Bitmap.Config.ARGB_8888);
         bitmapCanvas = new Canvas(mBitmap);
-        bitmapCanvas.drawPath(getPathAFromLowerRight(),pathAPaint);
-        bitmapCanvas.drawPath(getPathC(),pathCPaint);
-        bitmapCanvas.drawPath(getPathB(),pathBPaint);
+        if (a.x == -1 && a.y == -1){
+            bitmapCanvas.drawPath(getPathDefault(),pathAPaint);
+        }else {
+            if (f.x==viewWidth && f.y == 0){
+                bitmapCanvas.drawPath(getPathAFromTopRight(),pathAPaint);
+            }else if (f.x == viewWidth && f.y == viewHeight){
+                bitmapCanvas.drawPath(getPathAFromLowerRight(),pathAPaint);
+            }
+            bitmapCanvas.drawPath(getPathC(),pathCPaint);
+            bitmapCanvas.drawPath(getPathB(),pathBPaint);
+        }
+
         canvas.drawBitmap(mBitmap,0,0,null);
-
         //绘制个标识点
-        drawIdentificationPoint(canvas);
+//        drawIdentificationPoint(canvas);
 
+    }
+
+    private Path getPathDefault() {
+        pathA.reset();
+        pathA.lineTo(0,viewHeight);
+        pathA.lineTo(viewWidth,viewHeight);
+        pathA.lineTo(viewWidth,0);
+        pathA.close();
+        return pathA;
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int height = measureSize(defaultHeight, heightMeasureSpec);
+        int width = measureSize(defaultWidth, widthMeasureSpec);
+        setMeasuredDimension(width,height);
+        viewWidth = width;
+        viewHeight = height;
+        a.x = -1;
+        a.y = -1;
+        f.x = width;
+        f.y = height;
+        calcPointsXY(a,f);
+    }
+
+    private int measureSize(int defaultSize, int measureSpec) {
+        int result = defaultSize;
+        int mode = MeasureSpec.getMode(measureSpec);
+        int size = MeasureSpec.getSize(measureSpec);
+        if (mode == MeasureSpec.EXACTLY){
+            result = size;
+        }else if (mode == MeasureSpec.AT_MOST){
+            result = Math.min(result,size);
+        }
+        return result;
+    }
+
+    /**
+     * 获得f点在右上角的pathA
+     * @return
+     */
+    private Path getPathAFromTopRight() {
+        pathA.reset();
+        pathA.lineTo(c.x,c.y);
+        pathA.quadTo(e.x,e.y,b.x,b.y);
+        pathA.lineTo(a.x,a.y);
+        pathA.lineTo(k.x,k.y);
+        pathA.quadTo(h.x,h.y,j.x,j.y);
+        pathA.lineTo(viewWidth,viewHeight);
+        pathA.lineTo(0,viewHeight);
+        pathA.close();
+        return pathA;
     }
 
     private Path getPathB() {
@@ -225,5 +291,71 @@ public class BookPageView extends View {
                 / ((y1 - y2) * (x3 - x4) - (x1 - x2) * (y3 - y4));
 
         return  new MyPoint(pointX,pointY);
+    }
+
+    public int getViewHeight() {
+        return viewHeight;
+    }
+
+    public int getViewWidth() {
+        return viewWidth;
+    }
+
+    /**
+     * 设置触摸点
+     * @param x
+     * @param y
+     * @param style
+     */
+    public void setTouchPoint(float x, float y, String style) {
+        switch (style){
+            case STYLE_LOWER_RIGHT:
+                f.x = viewWidth;
+                f.y = viewHeight;
+                break;
+            case STYLE_TOP_RIGHT:
+                f.x = viewWidth;
+                f.y = 0;
+                break;
+            default:
+                    break;
+        }
+        MyPoint touchPoint = new MyPoint(x, y);
+        if (calePointCX(touchPoint,f)>0){
+            a.x = x;
+            a.y = y;
+            calcPointsXY(a,f);
+        }else {
+            calcPointsXY(a,f);
+        }
+
+        postInvalidate();
+    }
+
+    /**
+     * 计算c点的x值
+     * @param a
+     * @param f
+     * @return
+     */
+    private float calePointCX(MyPoint a, MyPoint f) {
+        MyPoint g,e;
+        g = new MyPoint();
+        e = new MyPoint();
+        g.x = (a.x + f.x) / 2;
+        g.y = (a.y + f.y) / 2;
+
+        e.x = g.x - (f.y - g.y) * (f.y - g.y) / (f.x - g.x);
+        e.y = f.y;
+
+        return e.x - (f.x - e.x) / 2;
+
+    }
+
+
+    public void setDefaultPath() {
+        a.x = -1;
+        a.y = -1;
+        postInvalidate();
     }
 }
