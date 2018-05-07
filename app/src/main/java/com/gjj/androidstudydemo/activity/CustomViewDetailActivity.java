@@ -250,32 +250,62 @@ public class CustomViewDetailActivity extends AppCompatActivity {
 
                 case BOOK_PAGE:
                     mBookPage.setVisibility(View.VISIBLE);
-                    mBookPage.setOnTouchListener(new View.OnTouchListener() {
-                        @Override
-                        public boolean onTouch(View v, MotionEvent event) {
-                            switch (event.getAction()){
-                                case MotionEvent.ACTION_DOWN:
-                                    if (event.getY() < mBookPage.getViewHeight()/2){
-                                        mBookPage.setTouchPoint(event.getX(),event.getY(),BookPageView.STYLE_TOP_RIGHT);
-                                    }else {//从下半部分翻页
-                                        mBookPage.setTouchPoint(event.getX(),event.getY(),BookPageView.STYLE_LOWER_RIGHT);
-                                    }
-                                    break;
-                                case MotionEvent.ACTION_MOVE:
-                                    mBookPage.setTouchPoint(event.getX(),event.getY(),"");
-                                    break;
-                                case MotionEvent.ACTION_UP:
-                                    mBookPage.setDefaultPath();
-                                    break;
-                            }
-                            return false;
-                        }
-                    });
+                    initBookPageListener();
+
                     break;
 
             }
             setTitle(flag);
         }
+    }
+    String style = null;
+    private void initBookPageListener() {
+        mBookPage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        float y = event.getY();
+                        float x = event.getX();
+
+                        int height = mBookPage.getViewHeight();
+                        int width = mBookPage.getViewWidth();
+
+                        if(x<=width/3){//左
+                            style = BookPageView.STYLE_LEFT;
+//                            Toast.makeText(PageActivity.this,"点击了左部",Toast.LENGTH_SHORT).show();
+                            mBookPage.setTouchPoint(x,y,style);
+
+                        }else if(x>width/3 && y<=height/3){//上
+                            style = BookPageView.STYLE_TOP_RIGHT;
+//                            Toast.makeText(PageActivity.this,"点击了上部",Toast.LENGTH_SHORT).show();
+                            mBookPage.setTouchPoint(x,y,style);
+
+                        }else if(x>width*2/3 && y>height/3 && y<=height*2/3){//右
+                            style = BookPageView.STYLE_RIGHT;
+//                            Toast.makeText(PageActivity.this,"点击了右部",Toast.LENGTH_SHORT).show();
+                            mBookPage.setTouchPoint(x,y,style);
+
+                        }else if(x>width/3 && y>height*2/3){//下
+                            style = BookPageView.STYLE_LOWER_RIGHT;
+//                            Toast.makeText(PageActivity.this,"点击了下部",Toast.LENGTH_SHORT).show();
+                            mBookPage.setTouchPoint(x,y,style);
+
+                        }else if(x>width/3 && x<width*2/3 && y>height/3 && y<height*2/3){//中
+                            style = BookPageView.STYLE_MODDLE;
+//                            Toast.makeText(PageActivity.this,"点击了中部",Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        mBookPage.setTouchPoint(event.getX(), event.getY(),style);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        mBookPage.startCancelAnim();
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     private void initPieData() {

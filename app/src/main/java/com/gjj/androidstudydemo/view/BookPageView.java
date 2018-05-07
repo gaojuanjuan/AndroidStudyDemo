@@ -11,6 +11,8 @@ import android.graphics.PorterDuffXfermode;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
+import android.widget.Scroller;
 
 import com.gjj.androidstudydemo.R;
 import com.gjj.androidstudydemo.bean.MyPoint;
@@ -37,9 +39,14 @@ public class BookPageView extends View {
     private Paint pathBPaint;
     private Path pathB;
 
+    private String style;
+    public static final String STYLE_LEFT = "STYLE_LEFT";//点击左边区域
+    public static final String STYLE_RIGHT = "STYLE_RIGHT";//点击右边区域
+    public static final String STYLE_MODDLE = "STYLE_MODDLE";//点击中间区域
     public static final String STYLE_TOP_RIGHT = "STYLE_TOP_RIGHT";//f点在右上角
     public static final String STYLE_LOWER_RIGHT = "STYLE_LOWER_RIGHT";//f点在右下角
 
+    public Scroller mScroller;
     public BookPageView(Context context) {
         super(context);
     }
@@ -97,6 +104,25 @@ public class BookPageView extends View {
 
         pathB = new Path();
 
+        mScroller = new Scroller(context,new LinearInterpolator());//以常量速率滑动即可
+
+    }
+
+    @Override
+    public void computeScroll() {
+        if (mScroller.computeScrollOffset()){
+            int x = mScroller.getCurrX();
+            int y = mScroller.getCurrY();
+
+            if (style.equals(STYLE_TOP_RIGHT)){
+                setTouchPoint(x,y,STYLE_TOP_RIGHT);
+            }else {
+                setTouchPoint(x,y,STYLE_LOWER_RIGHT);
+            }
+            if (mScroller.getFinalX() == x && mScroller.getFinalY() == y){
+                setDefaultPath();//重置默认界面
+            }
+        }
     }
 
     @Override
@@ -308,28 +334,61 @@ public class BookPageView extends View {
      * @param style
      */
     public void setTouchPoint(float x, float y, String style) {
+        MyPoint touchPoint = new MyPoint();
+        a.x = x;
+        a.y = y;
+        this.style = style;
         switch (style){
             case STYLE_LOWER_RIGHT:
                 f.x = viewWidth;
                 f.y = viewHeight;
+                calcPointsXY(a,f);
+                touchPoint = new MyPoint(x,y);
+                if (calePointCX(touchPoint,f)<0){//如果c点坐标小于0则重新测量a点坐标
+                    calcPointAByTouchPoint();
+                    calcPointsXY(a,f);
+                }
+                postInvalidate();
                 break;
             case STYLE_TOP_RIGHT:
                 f.x = viewWidth;
                 f.y = 0;
+                calcPointsXY(a,f);
+                touchPoint = new MyPoint(x,y);
+                if (calePointCX(touchPoint,f)<0){//如果c点坐标小于0则重新测量a点坐标
+                    calcPointAByTouchPoint();
+                    calcPointsXY(a,f);
+                }
+                postInvalidate();
+                break;
+            case STYLE_LEFT:
+            case STYLE_RIGHT:
+                a.y = viewHeight-1;
+                f.x = viewWidth;
+                f.y = viewHeight;
+                calcPointsXY(a,f);
+                postInvalidate();
                 break;
             default:
                     break;
         }
-        MyPoint touchPoint = new MyPoint(x, y);
-        if (calePointCX(touchPoint,f)>0){
-            a.x = x;
-            a.y = y;
-            calcPointsXY(a,f);
-        }else {
-            calcPointsXY(a,f);
-        }
 
-        postInvalidate();
+
+    }
+
+    /**
+     * 如果c点x坐标小于0,根据触摸点重新测量a点坐标
+     */
+    private void calcPointAByTouchPoint(){
+        float w0 = viewWidth - c.x;
+
+        float w1 = Math.abs(f.x - a.x);
+        float w2 = viewWidth * w1 / w0;
+        a.x = Math.abs(f.x - w2);
+
+        float h1 = Math.abs(f.y - a.y);
+        float h2 = w2 * h1 / w1;
+        a.y = Math.abs(f.y - h2);
     }
 
     /**
@@ -357,5 +416,17 @@ public class BookPageView extends View {
         a.x = -1;
         a.y = -1;
         postInvalidate();
+    }
+
+    public void startCancelAnim() {
+        int dx,dy;
+        if (style.equals(STYLE_TOP_RIGHT)){
+            dx = ((int) (viewWidth - 1 - a.x));
+            dy = ((int) (1-a.y));
+        }else {
+            dx = ((int) (viewWidth - 1 - a.x));
+            dy = ((int) (viewHeight - 1 - a.y));
+        }
+        mScroller.startScroll((int) a.x,(int) a.y,dx,dy,400);
     }
 }
