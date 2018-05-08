@@ -10,6 +10,7 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Region;
+import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -51,6 +52,8 @@ public class BookPageView extends View {
     public Scroller mScroller;
     private Paint textPaint;
     private Paint pathCContentPaint;
+    private float lPathAShadowDis = 0;//A区域左阴影矩形短边长度参考值
+    private float rPathAShadowDis = 0;//A区域右阴影矩形短边长度参考值
 
     public BookPageView(Context context) {
         super(context);
@@ -120,6 +123,8 @@ public class BookPageView extends View {
         pathCContentPaint = new Paint();
         pathCContentPaint.setColor(Color.YELLOW);
         pathCContentPaint.setAntiAlias(true);
+
+        style = STYLE_LOWER_RIGHT;
     }
 
     @Override
@@ -211,10 +216,53 @@ public class BookPageView extends View {
         mMatrix.setValues(mMatrixArray);//翻转和旋转
         mMatrix.preTranslate(-e.x, -e.y);//沿当前XY轴负方向位移得到 矩形A₃B₃C₃D₃
         mMatrix.postTranslate(e.x, e.y);//沿原XY轴方向位移得到 矩形A4 B4 C4 D4
-
         canvas.drawBitmap(contentBitmap, mMatrix, null);
+
+        drawPathCShadow(canvas);
         canvas.restore();
 
+    }
+
+    /**
+     * 绘制C区域阴影，阴影左浅右深
+     * @param canvas
+     */
+    private void drawPathCShadow(Canvas canvas) {
+        int deepColor = 0xff111111;//为了让效果更明显使用此颜色代码，具体可根据实际情况调整
+//        int deepColor = 0x55333333;
+        int lightColor = 0x00333333;
+        int[] gradientColors = {lightColor,deepColor};//渐变颜色数组
+
+        int deepOffset = 1;//深色端的偏移值
+        int lightOffset = -30;//浅色端的偏移值
+        float viewDiagonalLength = (float) Math.hypot(viewWidth, viewHeight);//view对角线长度
+        int midpoint_ce = (int) (c.x + e.x) / 2;//ce中点
+        int midpoint_jh = (int) (j.y + h.y) / 2;//jh中点
+        float minDisToControlPoint = Math.min(Math.abs(midpoint_ce - e.x), Math.abs(midpoint_jh - h.y));//中点到控制点的最小值
+
+        int left;
+        int right;
+        int top = (int) c.y;
+        int bottom = (int) (viewDiagonalLength + c.y);
+        GradientDrawable gradientDrawable;
+        if (style.equals(STYLE_TOP_RIGHT)) {
+            gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColors);
+            gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+            left = (int) (c.x - lightOffset);
+            right = (int) (c.x + minDisToControlPoint + deepOffset);
+        } else {
+            gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, gradientColors);
+            gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+            left = (int) (c.x - minDisToControlPoint - deepOffset);
+            right = (int) (c.x + lightOffset);
+        }
+        gradientDrawable.setBounds(left,top,right,bottom);
+
+        float mDegrees = (float) Math.toDegrees(Math.atan2(e.x- f.x, h.y - f.y));
+        canvas.rotate(mDegrees, c.x, c.y);
+        gradientDrawable.draw(canvas);
     }
 
     private void drawPathBContent(Canvas canvas, Path pathA, Paint pathPaint) {
@@ -232,8 +280,52 @@ public class BookPageView extends View {
         canvas.clipPath(getPathC(),Region.Op.UNION);//裁剪出A和C区域的全集
         canvas.clipPath(getPathB(), Region.Op.REVERSE_DIFFERENCE);//裁剪出B区域中不同于与AC区域的部分
         canvas.drawBitmap(contentBitmap, 0, 0, null);
-        canvas.restore();
 
+        //为了更好低观察在不裁剪时阴影区域的范围，重置一下画布
+        drawPathBShadow(canvas);//绘制B区阴影
+        canvas.restore();
+    }
+
+    /**
+     * 绘制B区阴影，阴影左深右浅
+     * @param canvas
+     */
+    private void drawPathBShadow(Canvas canvas) {
+        int deepColor = 0xff111111;
+//        int deepColor = 0x55111111;
+        int linghtColor = 0x00111111;
+        int[] gradientColors = new int[]{deepColor,linghtColor};//渐变颜色数组
+
+        int deepOffset = 0;//深色端的偏移值
+        int lightOffset = 0;//浅色端的偏移值
+        float aTof =(float) Math.hypot((a.x - f.x),(a.y - f.y));//a到f的距离
+        float viewDiagonalLength = (float) Math.hypot(viewWidth, viewHeight);//对角线长度
+
+        int left;
+        int right;
+        int top = (int) c.y;
+        int bottom = (int) (viewDiagonalLength + c.y);
+        GradientDrawable gradientDrawable;
+        if(style.equals(STYLE_TOP_RIGHT)){//f点在右上角
+            //从左向右线性渐变
+            gradientDrawable =new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,gradientColors);
+            gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);//线性渐变
+
+            left = (int) (c.x - deepOffset);//c点位于左上角
+            right = (int) (c.x + aTof/4 + lightOffset);
+        }else {
+            //从右向左线性渐变
+            gradientDrawable =new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT,gradientColors);
+            gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+            left = (int) (c.x - aTof/4 - lightOffset);//c点位于左下角
+            right = (int) (c.x + deepOffset);
+        }
+        gradientDrawable.setBounds(left,top,right,bottom);//设置阴影矩形
+
+        float rotateDegrees = (float) Math.toDegrees(Math.atan2(e.x- f.x, h.y - f.y));//旋转角度
+        canvas.rotate(rotateDegrees, c.x, c.y);//以c为中心点旋转
+        gradientDrawable.draw(canvas);
     }
 
     /**
@@ -252,7 +344,144 @@ public class BookPageView extends View {
         canvas.save();
         canvas.clipPath(pathA, Region.Op.INTERSECT);//对绘制内容进行裁剪，取和A区域的交集
         canvas.drawBitmap(contentBitmap,0,0,null);
+        if(style.equals(STYLE_LEFT) || style.equals(STYLE_RIGHT)){
+            drawPathAHorizontalShadow(canvas,pathA);
+        }else{
+            drawPathALeftShadow(canvas,pathA);
+            drawPathARightShadow(canvas,pathA);
+        }
+
         canvas.restore();
+    }
+
+    /**
+     * 绘制A区域水平翻页阴影
+     * @param canvas
+     */
+    private void drawPathAHorizontalShadow(Canvas canvas, Path pathA){
+        canvas.restore();
+        canvas.save();
+
+        int deepColor = 0x44333333;
+        int lightColor = 0x01333333;
+        int[] gradientColors = {lightColor,deepColor};//渐变颜色数组
+
+        GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColors);
+        gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+        int maxShadowWidth = 30;//阴影矩形最大的宽度
+        int left = (int) (a.x - Math.min(maxShadowWidth,(rPathAShadowDis/2)));
+        int right = (int) (a.x);
+        int top = 0;
+        int bottom = viewHeight;
+        gradientDrawable.setBounds(left,top,right,bottom);
+
+        canvas.clipPath(pathA, Region.Op.INTERSECT);
+
+        float mDegrees = (float) Math.toDegrees(Math.atan2(f.x-a.x,f.y-h.y));
+        canvas.rotate(mDegrees, a.x, a.y);
+        gradientDrawable.draw(canvas);
+    }
+
+
+    /**
+     * 绘制A区域右阴影
+     * @param canvas
+     * @param pathA
+     */
+    private void drawPathARightShadow(Canvas canvas, Path pathA) {
+        canvas.restore();
+        canvas.save();
+
+        int deepColor = 0x33333333;
+        int lightColor = 0x01333333;
+        int[] gradientColors = {deepColor,lightColor,lightColor};//渐变颜色数组
+
+        float viewDiagonalLength = (float) Math.hypot(viewWidth, viewHeight);//view对角线长度
+        int left = (int) h.x;
+        int right = (int) (h.x + viewDiagonalLength*10);//需要足够长的长度
+        int top;
+        int bottom;
+
+        GradientDrawable gradientDrawable;
+        if (style.equals(STYLE_TOP_RIGHT)) {
+            gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, gradientColors);
+            gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+            top = (int) (h.y- rPathAShadowDis /2);
+            bottom = (int) h.y;
+        } else {
+            gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, gradientColors);
+            gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+            top = (int) h.y;
+            bottom = (int) (h.y+ rPathAShadowDis /2);
+        }
+        gradientDrawable.setBounds(left,top,right,bottom);
+
+        //裁剪出我们需要的区域
+        Path mPath = new Path();
+        mPath.moveTo(a.x- Math.max(rPathAShadowDis, lPathAShadowDis) /2,a.y);
+//        mPath.lineTo(i.x,i.y);
+        mPath.lineTo(h.x,h.y);
+        mPath.lineTo(a.x,a.y);
+        mPath.close();
+        canvas.clipPath(pathA);
+        canvas.clipPath(mPath, Region.Op.INTERSECT);
+
+        float mDegrees = (float) Math.toDegrees(Math.atan2(a.y-h.y, a.x-h.x));
+        canvas.rotate(mDegrees, h.x, h.y);
+        gradientDrawable.draw(canvas);
+    }
+
+    /**
+     * 绘制A区域左阴影
+     * @param canvas
+     * @param pathA
+     */
+    private void drawPathALeftShadow(Canvas canvas, Path pathA) {
+        canvas.restore();
+        canvas.save();
+
+        int deepColor = 0x33333333;
+        int lightColor = 0x01333333;
+        int[] gradientColors = {lightColor,deepColor};//渐变颜色数组
+
+        int left;
+        int right;
+        int top = (int) e.y;
+        int bottom = (int) (e.y+viewHeight);
+
+        GradientDrawable gradientDrawable;
+        if (style.equals(STYLE_TOP_RIGHT)) {
+            gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColors);
+            gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+            left = (int) (e.x - lPathAShadowDis /2);
+            right = (int) (e.x);
+        } else {
+            gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, gradientColors);
+            gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+            left = (int) (e.x);
+            right = (int) (e.x + lPathAShadowDis /2);
+        }
+
+        //裁剪出我们需要的区域
+        Path mPath = new Path();
+        mPath.moveTo(a.x- Math.max(rPathAShadowDis, lPathAShadowDis) /2,a.y);
+        mPath.lineTo(d.x,d.y);
+        mPath.lineTo(e.x,e.y);
+        mPath.lineTo(a.x,a.y);
+        mPath.close();
+        canvas.clipPath(pathA);
+        canvas.clipPath(mPath, Region.Op.INTERSECT);
+
+        float mDegrees = (float) Math.toDegrees(Math.atan2(e.x-a.x, a.y-e.y));
+        canvas.rotate(mDegrees, e.x, e.y);
+
+        gradientDrawable.setBounds(left,top,right,bottom);
+        gradientDrawable.draw(canvas);
     }
 
     private Path getPathDefault() {
@@ -393,6 +622,18 @@ public class BookPageView extends View {
 
         i.x = (j.x + 2 * h.x + k.x) / 4;
         i.y = (2 * h.y + j.y + k.y) / 4;
+
+        //计算d点到直线ae的距离
+        float lA = a.y-e.y;
+        float lB = e.x-a.x;
+        float lC = a.x*e.y-e.x*a.y;
+        lPathAShadowDis = Math.abs((lA*d.x+lB*d.y+lC)/(float) Math.hypot(lA,lB));
+        //计算i点到ah的距离
+//计算i点到ah的距离
+        float rA = a.y-h.y;
+        float rB = h.x-a.x;
+        float rC = a.x*h.y-h.x*a.y;
+        rPathAShadowDis = Math.abs((rA*i.x+rB*i.y+rC)/(float) Math.hypot(rA,rB));
     }
 
     /**
