@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
@@ -49,6 +50,7 @@ public class BookPageView extends View {
 
     public Scroller mScroller;
     private Paint textPaint;
+    private Paint pathCContentPaint;
 
     public BookPageView(Context context) {
         super(context);
@@ -114,6 +116,10 @@ public class BookPageView extends View {
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setSubpixelText(true);
         textPaint.setTextSize(40);
+
+        pathCContentPaint = new Paint();
+        pathCContentPaint.setColor(Color.YELLOW);
+        pathCContentPaint.setAntiAlias(true);
     }
 
     @Override
@@ -143,29 +149,71 @@ public class BookPageView extends View {
         mBitmap = Bitmap.createBitmap((int) viewWidth, (int) viewHeight, Bitmap.Config.ARGB_8888);
         bitmapCanvas = new Canvas(mBitmap);
         if (a.x == -1 && a.y == -1){
-//            bitmapCanvas.drawPath(getPathDefault(),pathAPaint);
             drawPathAContent(bitmapCanvas,getPathDefault(),pathAPaint);
         }else {
             if (f.x==viewWidth && f.y == 0){
-//                bitmapCanvas.drawPath(getPathAFromTopRight(),pathAPaint);
                 drawPathAContent(bitmapCanvas,getPathAFromTopRight(),pathAPaint);
-                
+
                 bitmapCanvas.drawPath(getPathC(),pathCPaint);
+                drawPathCContent(bitmapCanvas,getPathAFromTopRight(),pathCContentPaint);
+
                 drawPathBContent(bitmapCanvas,getPathAFromTopRight(),pathBPaint);
             }else if (f.x == viewWidth && f.y == viewHeight){
-//                bitmapCanvas.drawPath(getPathAFromLowerRight(),pathAPaint);
                 drawPathAContent(bitmapCanvas,getPathAFromLowerRight(),pathAPaint);
 
                 bitmapCanvas.drawPath(getPathC(),pathCPaint);
+                drawPathCContent(bitmapCanvas,getPathAFromLowerRight(),pathCContentPaint);
+
                 drawPathBContent(bitmapCanvas,getPathAFromLowerRight(),pathBPaint);
                 
             }
-//            bitmapCanvas.drawPath(getPathB(),pathBPaint);
         }
 
         canvas.drawBitmap(mBitmap,0,0,null);
         //绘制个标识点
 //        drawIdentificationPoint(canvas);
+
+    }
+
+    /**
+     * 绘制C区域内容
+     * @param canvas
+     * @param pathA
+     * @param pathPaint
+     */
+    private void drawPathCContent(Canvas canvas, Path pathA, Paint pathPaint) {
+        Bitmap contentBitmap = Bitmap.createBitmap(viewWidth, viewHeight, Bitmap.Config.RGB_565);
+        Canvas contentCanvas = new Canvas(contentBitmap);
+        //下面开始绘制区域内的内容...
+        contentCanvas.drawPath(getPathB(),pathPaint);//绘制一个背景，path用B的就行
+        contentCanvas.drawText("这是在C区域的内容...CCCC", viewWidth-350, viewHeight-100, textPaint);
+
+        //结束绘制区域内的内容...
+
+        canvas.save();
+        canvas.clipPath(pathA);
+//        canvas.clipPath(getPathC(), Region.Op.REVERSE_DIFFERENCE);//裁剪出C区域不同于A区域的部分
+        canvas.clipPath(getPathC(), Region.Op.UNION);//裁剪出A和C区域的全集
+        canvas.clipPath(getPathC(), Region.Op.INTERSECT);//取与C区域的交集
+
+        float eh = (float) Math.hypot(f.x - e.x,h.y - f.y);
+        float sin0 = (f.x - e.x) / eh;
+        float cos0 = (h.y - f.y) / eh;
+        //设置翻转和旋转矩阵
+        float[] mMatrixArray = { 0, 0, 0, 0, 0, 0, 0, 0, 1.0f };
+        mMatrixArray[0] = -(1-2 * sin0 * sin0);
+        mMatrixArray[1] = 2 * sin0 * cos0;
+        mMatrixArray[3] = 2 * sin0 * cos0;
+        mMatrixArray[4] = 1 - 2 * sin0 * sin0;
+
+        Matrix mMatrix = new Matrix();
+        mMatrix.reset();
+        mMatrix.setValues(mMatrixArray);//翻转和旋转
+        mMatrix.preTranslate(-e.x, -e.y);//沿当前XY轴负方向位移得到 矩形A₃B₃C₃D₃
+        mMatrix.postTranslate(e.x, e.y);//沿原XY轴方向位移得到 矩形A4 B4 C4 D4
+
+        canvas.drawBitmap(contentBitmap, mMatrix, null);
+        canvas.restore();
 
     }
 
