@@ -26,6 +26,8 @@ public class Android5Activity extends AppCompatActivity {
         ButterKnife.bind(this);
         setTitle("Android 5.0转场动画");
         mIntent = new Intent(Android5Activity.this, Android5DetailActivity.class);
+
+
     }
 
     @OnClick({R.id.btn_explode_anim, R.id.btn_slide_anim, R.id.btn_fade_anim, R.id.btn_share_anim})

@@ -4,15 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.gjj.androidstudydemo.R;
+import com.gjj.androidstudydemo.adapter.CommonListAdapter;
 import com.gjj.androidstudydemo.utils.Constants;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class CustomViewActivity extends AppCompatActivity {
+public class CustomViewActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
+    @BindView(R.id.listview)
+    ListView listview;
     private Intent mIntent;
 
     @Override
@@ -22,81 +28,81 @@ public class CustomViewActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setTitle("自定义View");
         mIntent = new Intent(CustomViewActivity.this, CustomViewDetailActivity.class);
-    }
+        String[] customViewStrings = getResources().getStringArray(R.array.custom_view);
 
-    @OnClick({R.id.btn_checkview, R.id.btn_drawpath, R.id.btn_bezier3, R.id.btn_op,
-            R.id.btn_search_view, R.id.btn_matrix_camera1, R.id.btn_pie_chart, R.id.btn_five_ring,
-            R.id.btn_seek_bar, R.id.btn_twinkling_tv, R.id.btn_color_selector,
-            R.id.btn_circle_gradient_seekbar, R.id.btn_line_chart_view, R.id.btn_circle_img,
-            R.id.btn_custom_view1,R.id.btn_draw_rect,R.id.btn_circle_bar,R.id.btn_wave_progress,
-            R.id.btn_BookPage})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btn_checkview:
-                startCustomActivity(Constants.CHECKVIEW);
-                break;
-            case R.id.btn_drawpath:
-                startCustomActivity(Constants.RADAR);
-                break;
-            case R.id.btn_bezier3:
-                startCustomActivity(Constants.BEZIER3);
-                break;
-            case R.id.btn_op:
-                startCustomActivity(Constants.OP_VIEW);
-                break;
-            case R.id.btn_search_view:
-                startCustomActivity(Constants.PATHMEASURE_SEARCHVIEW);
-                break;
-            case R.id.btn_matrix_camera1:
-                startCustomActivity(Constants.MATRIX_CAMERA1);
-                break;
-            case R.id.btn_pie_chart:
-                startCustomActivity(Constants.PIECHART);
-                break;
-            case R.id.btn_five_ring:
-                startCustomActivity(Constants.FIVERING);
-                break;
-            case R.id.btn_seek_bar:
-                startCustomActivity(Constants.GRADIENT_SEEKBAR);
-                break;
-            case R.id.btn_twinkling_tv:
-                startCustomActivity(Constants.TWINKLING_TV);
-                break;
-            case R.id.btn_color_selector:
-                startCustomActivity(Constants.COLOR_SELECTOR);
-                break;
-            case R.id.btn_circle_gradient_seekbar:
-                startCustomActivity(Constants.CIRCLE_GRADIENT_SEEKBAR);
-                break;
-            case R.id.btn_line_chart_view:
-                startCustomActivity(Constants.LINECHART);
-                break;
-            case R.id.btn_circle_img:
-                startCustomActivity(Constants.BITMAP_SHADER);
-                break;
-            case R.id.btn_custom_view1:
-                startCustomActivity(Constants.CUSTOM_VIEW1);
-                break;
-            case R.id.btn_draw_rect:
-                startActivity(new Intent(CustomViewActivity.this, SquareActivity.class));
-                break;
-            case R.id.btn_circle_bar:
-                startCustomActivity(Constants.CIRCLE_BAR);
-                break;
-            case R.id.btn_wave_progress:
-                startCustomActivity(Constants.WAVE_PROGRESS);
-                break;
-            case R.id.btn_BookPage:
-                startCustomActivity(Constants.BOOK_PAGE);
-                break;
+        listview.setAdapter(new CommonListAdapter(this,customViewStrings));
+        listview.setOnItemClickListener(this);
 
-
-        }
     }
 
 
     private void startCustomActivity(String flag) {
-        mIntent.putExtra(Constants.CUSTOMVIEW_FLAG,flag);
+        mIntent.putExtra(Constants.CUSTOMVIEW_FLAG, flag);
         startActivity(mIntent);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        switch (i){
+            case 0:
+                startCustomActivity(Constants.BOOK_PAGE);
+                break;
+            case 1:
+                startCustomActivity(Constants.WAVE_PROGRESS);
+                break;
+            case 2:
+                startCustomActivity(Constants.CIRCLE_BAR);
+                break;
+            case 3:
+                startActivity(new Intent(CustomViewActivity.this, SquareActivity.class));
+                break;
+            case 4:
+                startCustomActivity(Constants.CUSTOM_VIEW1);
+                break;
+            case 5:
+                startCustomActivity(Constants.CHECKVIEW);
+                break;
+            case 6:
+                startCustomActivity(Constants.RADAR);
+                break;
+            case 7:
+                startCustomActivity(Constants.BEZIER3);
+                break;
+            case 8:
+                startCustomActivity(Constants.OP_VIEW);
+                break;
+            case 9:
+                startCustomActivity(Constants.PATHMEASURE_SEARCHVIEW);
+                break;
+            case 10:
+                startCustomActivity(Constants.MATRIX_CAMERA1);
+                break;
+            case 11:
+                startCustomActivity(Constants.PIECHART);
+                break;
+            case 12:
+                startCustomActivity(Constants.FIVERING);
+                break;
+            case 13:
+                startCustomActivity(Constants.GRADIENT_SEEKBAR);
+                break;
+            case 14:
+                startCustomActivity(Constants.TWINKLING_TV);
+                break;
+            case 15:
+                startCustomActivity(Constants.COLOR_SELECTOR);
+                break;
+            case 16:
+                startCustomActivity(Constants.CIRCLE_GRADIENT_SEEKBAR);
+                break;
+            case 17:
+                startCustomActivity(Constants.LINECHART);
+                break;
+            case 18:
+                startCustomActivity(Constants.BITMAP_SHADER);
+                break;
+
+
+        }
     }
 }

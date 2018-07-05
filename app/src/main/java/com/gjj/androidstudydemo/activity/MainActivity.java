@@ -4,42 +4,45 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.gjj.androidstudydemo.R;
+import com.gjj.androidstudydemo.adapter.CommonListAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    @BindView(R.id.btn_custom_view)
-    Button mBtnCustomView;
-    @BindView(R.id.btn_anim)
-    Button mBtnAnim;
-    private String[] animStrings;
-    private String[] customViewStrings;
+    @BindView(R.id.listview)
+    ListView listview;
+    private String[] mAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        animStrings = getResources().getStringArray(R.array.animation);
-        customViewStrings = getResources().getStringArray(R.array.custom_view);
+
+        mAll = getResources().getStringArray(R.array.all);
+        listview.setAdapter(new CommonListAdapter(this,mAll));
+
+        listview.setOnItemClickListener(this);
     }
 
-    @OnClick({R.id.btn_custom_view, R.id.btn_anim})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btn_custom_view:
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        switch (i){
+            case 0:
                 startActivity(new Intent(MainActivity.this, CustomViewActivity.class));
                 break;
-            case R.id.btn_anim:
-                startActivity(new Intent(MainActivity.this,AnimationActivity.class));
+            case 1:
+                startActivity(new Intent(MainActivity.this, AnimationActivity.class));
                 break;
         }
     }
-
 }

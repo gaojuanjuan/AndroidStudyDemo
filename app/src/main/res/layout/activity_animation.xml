@@ -1,53 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
+
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context="com.gjj.androidstudydemo.activity.AnimationActivity">
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/listview"
+        android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
-        <Button
-            android:id="@+id/btn_tween_anim"
-            style="@style/Button_style"
-            android:text="补间动画"/>
-        <Button
-            android:id="@+id/btn_frame_anim"
-            style="@style/Button_style"
-            android:text="逐帧动画"/>
-        <Button
-            android:id="@+id/btn_property_anim"
-            style="@style/Button_style"
-            android:text="属性动画"/>
-        <Button
-            android:id="@+id/btn_circular_anim"
-            style="@style/Button_style"
-            android:text="Android 5.0 Circular Reveal"/>
-        <Button
-            android:id="@+id/btn_transitions_anim"
-            style="@style/Button_style"
-            android:text="Activity转场动画"/>
-        <Button
-            android:id="@+id/btn_vector_anim"
-            style="@style/Button_style"
-            android:text="矢量动画"/>
-        <Button
-            android:id="@+id/btn_path_draw"
-            style="@style/Button_style"
-            android:text="Path绘制"/>
-        <Button
-            android:id="@+id/btn_custom_svg1"
-            style="@style/Button_style"
-            android:text="自定义SVG1"/>
-        <Button
-            android:id="@+id/btn_custom_svg2"
-            style="@style/Button_style"
-            android:text="自定义SVG2"/>
-    </LinearLayout>
-</ScrollView>
+        android:layout_height="match_parent" />
+
+</LinearLayout>

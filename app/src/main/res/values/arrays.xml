@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
+
+
     <string-array name="custom_view">
+        <item>书籍翻页效果</item>
         <item>水波浪进度框</item>
         <item>圆形进度条</item>
-        <item>动态添加正方形（公司需求）</item>
+        <item>动态添加正方形</item>
         <item>可展开收起的水平菜单栏</item>
         <item>Canvas之绘制Bitmap</item>
         <item>雷达图绘制</item>
         <item>圆形变心形</item>
-        <item>布尔操作（八卦）</item>
+        <item>布尔操作(八卦)</item>
         <item>搜索示例</item>
         <item>Camera与Matrix实现立体3D切换效果</item>
-        <item>饼图</item>
-        <item>五环</item>
+        <item>绘制饼状图</item>
+        <item>绘制五环</item>
         <item>渐变的SeekBar</item>
         <item>自定义闪烁文本的TextView</item>
         <item>颜色选择器</item>
         <item>圆形颜色渐变的SeekBar</item>
-        <item>折线图</item>
-        <item>圆形图片</item>
+        <item>自定义折线图</item>
+        <item>自定义圆形View</item>
     </string-array>
     <string-array name="animation">
         <item>补间动画</item>
@@ -32,4 +35,13 @@
         <item>自定义SVG2</item>
     </string-array>
 
+    <string-array name="all">
+        <item>自定义view</item>
+        <item>动画实例的学习</item>
+    </string-array>
+    <string-array name="transitions">
+        <item>传统转场动画</item>
+        <item>5.0转场动画</item>
+        <item>传统转场动画典型应用</item>
+    </string-array>
 </resources>

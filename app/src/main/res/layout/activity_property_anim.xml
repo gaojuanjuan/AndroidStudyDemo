@@ -23,7 +23,7 @@
 
         <Button
             android:id="@+id/btn_property_start1"
-            style="@style/Button_style"
+            style="@style/item_style"
             android:onClick="startAnim1"
             android:text="开始动画"/>
 
@@ -38,7 +38,7 @@
 
         <Button
             android:id="@+id/btn_property_start2"
-            style="@style/Button_style"
+            style="@style/item_style"
             android:onClick="startAnim2"
             android:text="开始动画"/>
 
@@ -57,7 +57,7 @@
 
         <Button
             android:id="@+id/btn_property_start3"
-            style="@style/Button_style"
+            style="@style/item_style"
             android:onClick="startAnim3"
             android:text="开始动画"/>
 
@@ -68,13 +68,13 @@
 
         <Button
             android:id="@+id/btn_property_start4"
-            style="@style/Button_style"
+            style="@style/item_style"
             android:onClick="startAnim4"
             android:text="开始动画"/>
 
         <Button
             android:id="@+id/btn_property_path"
-            style="@style/Button_style"
+            style="@style/item_style"
             android:onClick="gotoPathAnim"
             android:layout_marginTop="32dp"
             android:text="基于path运动"/>
@@ -93,7 +93,7 @@
 
         <Button
             android:id="@+id/btn_property_start5"
-            style="@style/Button_style"
+            style="@style/item_style"
             android:onClick="startNumberAnimator"
             android:layout_marginTop="32dp"
             android:text="开始动画"/>

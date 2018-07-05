@@ -16,19 +16,19 @@
 
         <Button
             android:id="@+id/btn_explode_anim"
-            style="@style/Button_style"
+            style="@style/btn_style"
             android:text="explode"/>
         <Button
             android:id="@+id/btn_slide_anim"
-            style="@style/Button_style"
+            style="@style/btn_style"
             android:text="slide"/>
         <Button
             android:id="@+id/btn_fade_anim"
-            style="@style/Button_style"
+            style="@style/btn_style"
             android:text="fade"/>
         <Button
             android:id="@+id/btn_share_anim"
-            style="@style/Button_style"
+            style="@style/btn_style"
             android:text="share"/>
 
         <RelativeLayout

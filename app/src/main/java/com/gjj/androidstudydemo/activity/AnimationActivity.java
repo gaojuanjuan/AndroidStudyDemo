@@ -4,22 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.gjj.androidstudydemo.R;
+import com.gjj.androidstudydemo.adapter.CommonListAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AnimationActivity extends AppCompatActivity {
+public class AnimationActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    @BindView(R.id.btn_tween_anim)
-    Button mBtnTweenAnim;
-    @BindView(R.id.btn_frame_anim)
-    Button mBtnFrameAnim;
-    @BindView(R.id.btn_property_anim)
-    Button mBtnPropertyAnim;
+    @BindView(R.id.listview)
+    ListView listview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,40 +26,46 @@ public class AnimationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_animation);
         ButterKnife.bind(this);
         setTitle("动画的学习");
+
+        String[] animStrings = getResources().getStringArray(R.array.animation);
+
+        listview.setAdapter(new CommonListAdapter(this,animStrings));
+        listview.setOnItemClickListener(this);
     }
 
-    @OnClick({R.id.btn_tween_anim, R.id.btn_frame_anim, R.id.btn_property_anim,
-            R.id.btn_circular_anim, R.id.btn_transitions_anim, R.id.btn_vector_anim,
-            R.id.btn_path_draw, R.id.btn_custom_svg1, R.id.btn_custom_svg2})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btn_tween_anim:
+
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        switch (i){
+            case 0:
                 startActivity(new Intent(AnimationActivity.this, TweenActivity.class));
                 break;
-            case R.id.btn_frame_anim:
+            case 1:
                 startActivity(new Intent(AnimationActivity.this, FrameAnimActivity.class));
                 break;
-            case R.id.btn_property_anim:
+            case 2:
                 startActivity(new Intent(AnimationActivity.this, PropertyAnimActivity.class));
                 break;
-            case R.id.btn_circular_anim:
+            case 3:
                 startActivity(new Intent(AnimationActivity.this, CircularRevealActivity.class));
                 break;
-            case R.id.btn_transitions_anim:
+            case 4:
                 startActivity(new Intent(AnimationActivity.this, TransitionsActivity.class));
                 break;
-            case R.id.btn_vector_anim:
+            case 5:
                 startActivity(new Intent(AnimationActivity.this, VectorAnimationActivity.class));
                 break;
-            case R.id.btn_path_draw:
+            case 6:
                 startActivity(new Intent(AnimationActivity.this, DrawPathActivity.class));
                 break;
-            case R.id.btn_custom_svg1:
+            case 7:
                 startActivity(new Intent(AnimationActivity.this, CustomSVG1Activity.class));
                 break;
-            case R.id.btn_custom_svg2:
+            case 8:
                 startActivity(new Intent(AnimationActivity.this, CustomSVG2Activity.class));
                 break;
+
         }
     }
 }

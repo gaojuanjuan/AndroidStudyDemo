@@ -20,6 +20,6 @@
         android:layout_marginBottom="20dp"/>
     <Button
         android:id="@+id/btn_start"
-        style="@style/Button_style"
+        style="@style/item_style"
         android:text="开始动画"/>
 </LinearLayout>
