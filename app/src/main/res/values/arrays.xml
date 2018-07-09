@@ -14,7 +14,7 @@
         <item>布尔操作(八卦)</item>
         <item>搜索示例</item>
         <item>Camera与Matrix实现立体3D切换效果</item>
-        <item>绘制饼状图</item>
+        <item>绘制饼图1</item>
         <item>绘制五环</item>
         <item>渐变的SeekBar</item>
         <item>自定义闪烁文本的TextView</item>
@@ -22,6 +22,7 @@
         <item>圆形颜色渐变的SeekBar</item>
         <item>自定义折线图</item>
         <item>自定义圆形View</item>
+        <item>绘制饼图2</item>
     </string-array>
     <string-array name="animation">
         <item>补间动画</item>

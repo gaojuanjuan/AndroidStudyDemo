@@ -101,8 +101,9 @@ public class CustomViewActivity extends AppCompatActivity implements AdapterView
             case 18:
                 startCustomActivity(Constants.BITMAP_SHADER);
                 break;
-
-
+            case 19://绘制饼图2
+                startCustomActivity(Constants.PIECHART2);
+                break;
         }
     }
 }

@@ -31,6 +31,7 @@ import com.gjj.androidstudydemo.view.HorizontalExpandMenu;
 import com.gjj.androidstudydemo.view.LineChartView;
 import com.gjj.androidstudydemo.view.MatrixAndCameraView;
 import com.gjj.androidstudydemo.view.OpView;
+import com.gjj.androidstudydemo.view.PieChart2View;
 import com.gjj.androidstudydemo.view.PieChartView;
 import com.gjj.androidstudydemo.view.RadarView;
 import com.gjj.androidstudydemo.view.SearchView;
@@ -60,6 +61,7 @@ import static com.gjj.androidstudydemo.utils.Constants.MATRIX_CAMERA1;
 import static com.gjj.androidstudydemo.utils.Constants.OP_VIEW;
 import static com.gjj.androidstudydemo.utils.Constants.PATHMEASURE_SEARCHVIEW;
 import static com.gjj.androidstudydemo.utils.Constants.PIECHART;
+import static com.gjj.androidstudydemo.utils.Constants.PIECHART2;
 import static com.gjj.androidstudydemo.utils.Constants.RADAR;
 import static com.gjj.androidstudydemo.utils.Constants.TWINKLING_TV;
 import static com.gjj.androidstudydemo.utils.Constants.WAVE_PROGRESS;
@@ -134,6 +136,8 @@ public class CustomViewDetailActivity extends AppCompatActivity {
     HorizontalExpandMenu mExpandedMenu2;
     @BindView(R.id.book_page)
     BookPageView mBookPage;
+    @BindView(R.id.pie_chart2_view)
+    PieChart2View pieChart2View;
 
 
     @Override
@@ -249,13 +253,32 @@ public class CustomViewDetailActivity extends AppCompatActivity {
 
                 case BOOK_PAGE:
                     mBookPage.setVisibility(View.VISIBLE);
-
+                    break;
+                case PIECHART2:
+                    initPie();
+                    pieChart2View.setVisibility(View.VISIBLE);
                     break;
 
             }
             setTitle(flag);
         }
     }
+
+    private void initPie() {
+        PieChartBean bean1 = new PieChartBean(Color.parseColor("#f14033"), "郭瑜", 80);
+        PieChartBean bean2 = new PieChartBean(Color.parseColor("#e6870b"), "李旭", 30);
+        PieChartBean bean3 = new PieChartBean(Color.parseColor("#0fc2c2"), "南南", 50);
+        PieChartBean bean4 = new PieChartBean(Color.parseColor("#29b117"), "石瑾", 60);
+        PieChartBean bean5 = new PieChartBean(Color.parseColor("#1b75e4"), "羊角", 20);
+        List<PieChartBean> list = new ArrayList<>();
+        list.add(bean1);
+        list.add(bean2);
+        list.add(bean3);
+        list.add(bean4);
+        list.add(bean5);
+        pieChart2View.setData(list);
+    }
+
     String style = null;
 
     private void initPieData() {
