@@ -11,12 +11,12 @@
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-<!---->
+                <!--  -->
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".activity.CustomViewActivity" />
-        <activity android:name=".activity.CustomViewDetailActivity"></activity>
+        <activity android:name=".activity.CustomViewDetailActivity" />
         <activity android:name=".activity.AnimationActivity" />
         <activity android:name=".activity.TweenActivity" />
         <activity android:name=".activity.FrameAnimActivity" />
@@ -35,11 +35,13 @@
         <activity android:name=".activity.CustomSVG2Activity" />
         <activity android:name=".activity.SquareActivity" />
         <activity android:name=".activity.HencoderActivity">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
+        <activity android:name=".activity.TapViewActivity"></activity>
     </application>
 
 </manifest>

@@ -1,3 +1,43 @@
 <resources>
     <string name="app_name">AndroidStudyDemo</string>
+    <string name="custom_view">自定义view</string>
+    <string name="anim_instance">动画实例的学习</string>
+    <string name="anim_tween">补间动画</string>
+    <string name="anim_frame">逐帧动画</string>
+    <string name="anim_property">属性动画</string>
+    <string name="anim_circular_reveal">Android 5.0 Circular Reveal动画</string>
+    <string name="anim_transitions">Activity转场动画</string>
+    <string name="anim_vector">矢量动画</string>
+    <string name="anim_drawpath">Path绘制</string>
+    <string name="anim_custom_svg1">自定义SVG1</string>
+    <string name="anim_custom_svg2">自定义SVG2</string>
+
+
+    <string name="view_tape">漂亮的卷尺</string>
+    <string name="view_book_page">书籍翻页效果</string>
+    <string name="view_wave_progress">水波浪进度框</string>
+    <string name="view_circle_bar">圆形进度条</string>
+    <string name="view_square">动态添加正方形</string>
+    <string name="view_custom_view1">可展开收起的水平菜单栏</string>
+    <string name="view_checkview">Canvas之绘制Bitmap</string>
+    <string name="view_radar">雷达图绘制</string>
+    <string name="view_bezier3">圆形变心形</string>
+    <string name="view_op_view">布尔操作(八卦)</string>
+    <string name="view_pathmeasure_searchview">搜索示例</string>
+    <string name="view_matrix_camera1">Camera与Matrix实现立体3D切换效果</string>
+    <string name="view_pie_chart">绘制饼图1</string>
+    <string name="view_fivering">绘制五环</string>
+    <string name="view_gradient_seekbar">渐变的SeekBar</string>
+    <string name="view_twinkling_tv">自定义闪烁文本的TextView</string>
+    <string name="view_color_selector">颜色选择器</string>
+    <string name="view_circle_gradient_seekbar">圆形颜色渐变的SeekBar</string>
+    <string name="view_line_chart">自定义折线图</string>
+    <string name="view_bitmap_shader">自定义圆形View</string>
+    <string name="view_pie_chart2">绘制饼图2</string>
+
+
+    <string name="cm"> 厘米</string>
+    <string name="kg"> 公斤</string>
+    <string name="weight">今日体重</string>
+    <string name="height">身高</string>
 </resources>

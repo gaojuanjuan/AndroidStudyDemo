@@ -3,42 +3,43 @@
 
 
     <string-array name="custom_view">
-        <item>书籍翻页效果</item>
-        <item>水波浪进度框</item>
-        <item>圆形进度条</item>
-        <item>动态添加正方形</item>
-        <item>可展开收起的水平菜单栏</item>
-        <item>Canvas之绘制Bitmap</item>
-        <item>雷达图绘制</item>
-        <item>圆形变心形</item>
-        <item>布尔操作(八卦)</item>
-        <item>搜索示例</item>
-        <item>Camera与Matrix实现立体3D切换效果</item>
-        <item>绘制饼图1</item>
-        <item>绘制五环</item>
-        <item>渐变的SeekBar</item>
-        <item>自定义闪烁文本的TextView</item>
-        <item>颜色选择器</item>
-        <item>圆形颜色渐变的SeekBar</item>
-        <item>自定义折线图</item>
-        <item>自定义圆形View</item>
-        <item>绘制饼图2</item>
+        <item>@string/view_tape</item>
+        <item>@string/view_book_page</item>
+        <item>@string/view_wave_progress</item>
+        <item>@string/view_circle_bar</item>
+        <item>@string/view_square</item>
+        <item>@string/view_custom_view1</item>
+        <item>@string/view_checkview</item>
+        <item>@string/view_radar</item>
+        <item>@string/view_bezier3</item>
+        <item>@string/view_op_view</item>
+        <item>@string/view_pathmeasure_searchview</item>
+        <item>@string/view_matrix_camera1</item>
+        <item>@string/view_pie_chart</item>
+        <item>@string/view_fivering</item>
+        <item>@string/view_gradient_seekbar</item>
+        <item>@string/view_twinkling_tv</item>
+        <item>@string/view_color_selector</item>
+        <item>@string/view_circle_gradient_seekbar</item>
+        <item>@string/view_line_chart</item>
+        <item>@string/view_bitmap_shader</item>
+        <item>@string/view_pie_chart2</item>
     </string-array>
     <string-array name="animation">
-        <item>补间动画</item>
-        <item>逐帧动画</item>
-        <item>属性动画</item>
-        <item>Android 5.0 Circular Reveal动画</item>
-        <item>Activity转场动画</item>
-        <item>矢量动画</item>
-        <item>Path绘制</item>
-        <item>自定义SVG1</item>
-        <item>自定义SVG2</item>
+        <item>@string/anim_tween</item>
+        <item>@string/anim_frame</item>
+        <item>@string/anim_property</item>
+        <item>@string/anim_circular_reveal</item>
+        <item>@string/anim_transitions</item>
+        <item>@string/anim_vector</item>
+        <item>@string/anim_drawpath</item>
+        <item>@string/anim_custom_svg1</item>
+        <item>@string/anim_custom_svg2</item>
     </string-array>
 
     <string-array name="all">
-        <item>自定义view</item>
-        <item>动画实例的学习</item>
+        <item>@string/custom_view</item>
+        <item>@string/anim_instance</item>
     </string-array>
     <string-array name="transitions">
         <item>传统转场动画</item>

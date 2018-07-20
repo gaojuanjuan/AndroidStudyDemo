@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f8f8f8"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".activity.TapViewActivity">
+
+    <TextView
+        android:text="@string/weight"
+        android:textColor="#333333"
+        android:textSize="24sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_weight"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#60cd74"
+        android:textSize="20sp"/>
+    <com.gjj.androidstudydemo.view.TapeView
+        android:id="@+id/tapWeight"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:maxValue="200"
+        app:minValue="40"
+        app:per="0.1"
+        app:value="90"/>
+    <TextView
+        android:layout_marginTop="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#333333"
+        android:text="@string/height"
+        android:textSize="24sp"/>
+    <TextView
+        android:id="@+id/tv_height"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#60cd74"
+        android:textSize="20sp"/>
+    <com.gjj.androidstudydemo.view.TapeView
+        android:id="@+id/tapeHeight"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:calibrationWidth="1dp"
+        app:maxValue="230"
+        app:minValue="100"
+        app:value="164"/>
+</LinearLayout>

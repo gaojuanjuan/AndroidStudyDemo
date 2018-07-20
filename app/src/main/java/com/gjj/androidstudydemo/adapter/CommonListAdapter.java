@@ -49,7 +49,7 @@ public class CommonListAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        @BindView(R.id.tv_name)
+        @BindView(R.id.tv_rv)
         TextView tvName;
 
         ViewHolder(View view) {

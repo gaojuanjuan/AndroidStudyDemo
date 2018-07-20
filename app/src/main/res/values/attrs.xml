@@ -58,4 +58,26 @@
         <attr name="wave_height" format="dimension"/>
         <attr name="second_wave_color" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="TapeView">
+        <attr name="bgColor" format="color|reference"/>
+        <attr name="calibrationColor" format="color|reference"/>
+        <attr name="calibrationWidth" format="dimension|reference"/>
+        <attr name="calibrationShort" format="dimension|reference"/>
+        <attr name="calibrationLong" format="dimension|reference"/>
+
+        <attr name="triangleColor" format="color|reference"/>
+        <attr name="triangleHeight" format="dimension|reference"/>
+
+        <attr name="textColor" format="color|reference"/>
+        <attr name="textSize" format="dimension|reference"/>
+
+        <attr name="per" format="float|reference"/>
+        <attr name="perCount" format="integer"/>
+        <attr name="gapWidth" format="dimension|reference"/>
+        <attr name="minValue" format="float"/>
+        <attr name="maxValue" format="float"/>
+        <attr name="value" format="float"/>
+    </declare-styleable>
+
 </resources>

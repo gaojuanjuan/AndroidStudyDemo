@@ -3,22 +3,27 @@ package com.gjj.androidstudydemo.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ListView;
 
 import com.gjj.androidstudydemo.R;
-import com.gjj.androidstudydemo.adapter.CommonListAdapter;
+import com.gjj.androidstudydemo.adapter.ItemAdapter;
+
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-public class AnimationActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class AnimationActivity extends AppCompatActivity implements ItemAdapter.OnItemClickListener {
 
-    @BindView(R.id.listview)
-    ListView listview;
+
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
+    private String[] itemDatas;
+    private ItemAdapter mAdapter;
+    private HashMap<String, Class> itemMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,46 +31,31 @@ public class AnimationActivity extends AppCompatActivity implements AdapterView.
         setContentView(R.layout.activity_animation);
         ButterKnife.bind(this);
         setTitle("动画的学习");
+        initData();
+        mAdapter = new ItemAdapter(this, itemDatas);
+        mAdapter.setListener(this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        recyclerView.setAdapter(mAdapter);
+    }
 
-        String[] animStrings = getResources().getStringArray(R.array.animation);
-
-        listview.setAdapter(new CommonListAdapter(this,animStrings));
-        listview.setOnItemClickListener(this);
+    private void initData() {
+        itemDatas = getResources().getStringArray(R.array.animation);
+        itemMap = new HashMap<>();
+        itemMap.put(getResources().getString(R.string.anim_tween), TweenActivity.class);
+        itemMap.put(getResources().getString(R.string.anim_frame), FrameAnimActivity.class);
+        itemMap.put(getResources().getString(R.string.anim_property), PropertyAnimActivity.class);
+        itemMap.put(getResources().getString(R.string.anim_circular_reveal), CircularRevealActivity.class);
+        itemMap.put(getResources().getString(R.string.anim_transitions), TransitionsActivity.class);
+        itemMap.put(getResources().getString(R.string.anim_vector), VectorAnimationActivity.class);
+        itemMap.put(getResources().getString(R.string.anim_drawpath), DrawPathActivity.class);
+        itemMap.put(getResources().getString(R.string.anim_custom_svg1), CustomSVG1Activity.class);
+        itemMap.put(getResources().getString(R.string.anim_custom_svg2), CustomSVG2Activity.class);
     }
 
 
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        switch (i){
-            case 0:
-                startActivity(new Intent(AnimationActivity.this, TweenActivity.class));
-                break;
-            case 1:
-                startActivity(new Intent(AnimationActivity.this, FrameAnimActivity.class));
-                break;
-            case 2:
-                startActivity(new Intent(AnimationActivity.this, PropertyAnimActivity.class));
-                break;
-            case 3:
-                startActivity(new Intent(AnimationActivity.this, CircularRevealActivity.class));
-                break;
-            case 4:
-                startActivity(new Intent(AnimationActivity.this, TransitionsActivity.class));
-                break;
-            case 5:
-                startActivity(new Intent(AnimationActivity.this, VectorAnimationActivity.class));
-                break;
-            case 6:
-                startActivity(new Intent(AnimationActivity.this, DrawPathActivity.class));
-                break;
-            case 7:
-                startActivity(new Intent(AnimationActivity.this, CustomSVG1Activity.class));
-                break;
-            case 8:
-                startActivity(new Intent(AnimationActivity.this, CustomSVG2Activity.class));
-                break;
-
-        }
+    public void onItemClick(int position) {
+        startActivity(new Intent(this,itemMap.get(itemDatas[position])));
     }
 }

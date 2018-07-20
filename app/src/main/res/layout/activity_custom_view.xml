@@ -8,8 +8,9 @@
     android:orientation="vertical"
     tools:context="com.gjj.androidstudydemo.activity.CustomViewActivity">
 
-    <ListView
-        android:id="@+id/listview"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_margin="@dimen/dimen_15dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 </LinearLayout>
