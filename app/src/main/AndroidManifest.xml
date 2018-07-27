@@ -41,7 +41,8 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".activity.TapViewActivity"></activity>
+        <activity android:name=".activity.TapViewActivity" />
+        <activity android:name=".activity.EventStudyActivity"></activity>
     </application>
 
 </manifest>

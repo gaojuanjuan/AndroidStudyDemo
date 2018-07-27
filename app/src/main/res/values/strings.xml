@@ -2,6 +2,7 @@
     <string name="app_name">AndroidStudyDemo</string>
     <string name="custom_view">自定义view</string>
     <string name="anim_instance">动画实例的学习</string>
+    <string name="event_study">事件分发机制的学习</string>
     <string name="anim_tween">补间动画</string>
     <string name="anim_frame">逐帧动画</string>
     <string name="anim_property">属性动画</string>

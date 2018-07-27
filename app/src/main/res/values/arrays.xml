@@ -40,6 +40,7 @@
     <string-array name="all">
         <item>@string/custom_view</item>
         <item>@string/anim_instance</item>
+        <item>@string/event_study</item>
     </string-array>
     <string-array name="transitions">
         <item>传统转场动画</item>

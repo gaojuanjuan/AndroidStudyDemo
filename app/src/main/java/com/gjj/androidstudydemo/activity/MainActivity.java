@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements ItemAdapter.OnIte
         itemMap = new HashMap<>();
         itemMap.put(getResources().getString(R.string.custom_view), CustomViewActivity.class);
         itemMap.put(getResources().getString(R.string.anim_instance), AnimationActivity.class);
+        itemMap.put(getResources().getString(R.string.event_study), EventStudyActivity.class);
     }
 
 

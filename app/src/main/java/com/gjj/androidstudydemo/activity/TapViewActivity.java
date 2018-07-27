@@ -26,6 +26,7 @@ public class TapViewActivity extends AppCompatActivity implements TapeView.OnVal
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tap_view);
         ButterKnife.bind(this);
+        setTitle("漂亮的卷尺");
         tapWeight.setOnValueChangeListener(this);
         tapeHeight.setOnValueChangeListener(new TapeView.OnValueChangeListener() {
             @Override
